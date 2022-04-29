@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32317.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WCFService", "WCFService\WCFService.csproj", "{2C569EA3-F662-4D3E-8830-B1D11213875A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessengerHost", "MessengerHost\MessengerHost.csproj", "{1D80F5CD-57FA-4735-BAB9-4DBE2C1BC8D8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2C569EA3-F662-4D3E-8830-B1D11213875A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C569EA3-F662-4D3E-8830-B1D11213875A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C569EA3-F662-4D3E-8830-B1D11213875A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C569EA3-F662-4D3E-8830-B1D11213875A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D80F5CD-57FA-4735-BAB9-4DBE2C1BC8D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D80F5CD-57FA-4735-BAB9-4DBE2C1BC8D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D80F5CD-57FA-4735-BAB9-4DBE2C1BC8D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D80F5CD-57FA-4735-BAB9-4DBE2C1BC8D8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {107A42DF-F77D-42B9-98F9-C791097CAA81}
+	EndGlobalSection
+EndGlobal
