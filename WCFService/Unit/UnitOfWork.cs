@@ -7,7 +7,7 @@ using WCFService.DataBase;
 using WCFService.DTO;
 using WCFService.Repository;
 
-namespace WCFService.UnitOfWork
+namespace WCFService.Unit
 {
     public class UnitOfWork : IDisposable
     {

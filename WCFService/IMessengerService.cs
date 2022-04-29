@@ -12,6 +12,6 @@ namespace WCFService
     public interface IMessengerService
     {
         [OperationContract]
-        void DoWork();
+        string Registrarion(string login, string password, string name, string surname, string path);
     }
 }

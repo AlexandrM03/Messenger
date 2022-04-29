@@ -62,12 +62,13 @@
     <Compile Include="DTO\Report.cs" />
     <Compile Include="DTO\User.cs" />
     <Compile Include="DTO\UserAuth.cs" />
+    <Compile Include="HashManager.cs" />
     <Compile Include="IMessengerService.cs" />
     <Compile Include="MessengerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
-    <Compile Include="UnitOfWork\UnitOfWork.cs" />
+    <Compile Include="Unit\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
