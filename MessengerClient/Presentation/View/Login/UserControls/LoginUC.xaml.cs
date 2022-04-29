@@ -11,19 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerClient.Presentation.View.Login
+namespace MessengerClient.Presentation.View.Login.UserControls
 {
     /// <summary>
-    /// Interaction logic for Sign.xaml
+    /// Interaction logic for LoginUC.xaml
     /// </summary>
-    public partial class Sign : Window
+    public partial class LoginUC : UserControl
     {
-        public Sign()
+        public LoginUC(Window window)
         {
             InitializeComponent();
-            DataContext = new SignVM(this);
+            DataContext = new LoginVM(window);
         }
     }
 }

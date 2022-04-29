@@ -15,11 +15,11 @@ namespace MessengerClient.ServiceMessenger {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMessenger.IMessengerService")]
     public interface IMessengerService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/DoWork", ReplyAction="http://tempuri.org/IMessengerService/DoWorkResponse")]
-        void DoWork();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Registration", ReplyAction="http://tempuri.org/IMessengerService/RegistrationResponse")]
+        string Registration(string login, string password, string name, string surname, string path);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/DoWork", ReplyAction="http://tempuri.org/IMessengerService/DoWorkResponse")]
-        System.Threading.Tasks.Task DoWorkAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Registration", ReplyAction="http://tempuri.org/IMessengerService/RegistrationResponse")]
+        System.Threading.Tasks.Task<string> RegistrationAsync(string login, string password, string name, string surname, string path);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -49,12 +49,12 @@ namespace MessengerClient.ServiceMessenger {
                 base(binding, remoteAddress) {
         }
         
-        public void DoWork() {
-            base.Channel.DoWork();
+        public string Registration(string login, string password, string name, string surname, string path) {
+            return base.Channel.Registration(login, password, name, surname, path);
         }
         
-        public System.Threading.Tasks.Task DoWorkAsync() {
-            return base.Channel.DoWorkAsync();
+        public System.Threading.Tasks.Task<string> RegistrationAsync(string login, string password, string name, string surname, string path) {
+            return base.Channel.RegistrationAsync(login, password, name, surname, path);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using MessengerClient.Logic.ViewModel.LoginVM;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerClient.Presentation.View.Login
+namespace MessengerClient.Presentation.View.Login.UserControls
 {
     /// <summary>
-    /// Interaction logic for Sign.xaml
+    /// Interaction logic for RegistrationUC.xaml
     /// </summary>
-    public partial class Sign : Window
+    public partial class RegistrationUC : UserControl
     {
-        public Sign()
+        public RegistrationUC()
         {
             InitializeComponent();
-            DataContext = new SignVM(this);
         }
     }
 }
