@@ -20,6 +20,11 @@ namespace WCFService.Unit
         private Repository<Media> mediaRepository;
         private Repository<Report> reportRepository;
 
+        public UnitOfWork()
+        {
+            context = new Context();
+        }
+
         public Repository<User> UserRepository
         {
             get

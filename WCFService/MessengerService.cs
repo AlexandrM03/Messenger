@@ -16,19 +16,27 @@ namespace WCFService
         public string Registration(string login, string password, string name, string surname, string path)
         {
             // validate TODO
-            using (UnitOfWork uow = new UnitOfWork())
+            try
             {
-                string hashPassword = HashManager.GetHash(password);
-                UserAuth userAuth = new UserAuth() { Login = login, Password = hashPassword };
-                Media media = new Media() { Path = path };
-                uow.UserAuthRepository.Add(userAuth);
-                uow.MediaRepository.Add(media);
-                User user = new User() { Name = name, Surname = surname, Role = "user", IdMedia = media.Id, IdUserAuth = userAuth.Id };
-                uow.UserRepository.Add(user);
-                return "Nice";
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+                    string hashPassword = HashManager.GetHash(password);
+                    UserAuth userAuth = new UserAuth() { Login = login, Password = password };
+                    Media media = new Media() { Path = path };
+                    uow.UserAuthRepository.Add(userAuth);
+                    uow.MediaRepository.Add(media);
+                    User user = new User() { Name = name, Surname = surname, Role = "user", IdMedia = media.Id, IdUserAuth = userAuth.Id };
+                    uow.UserRepository.Add(user);
+                    //User user = new User() { Id = 1, IdMedia = 1, IdUserAuth = 1, Name = name, Surname = surname, Role = "user" };
+                    uow.UserRepository.Add(user);
+                    uow.Save();
+                    return "Nice";
+                }
             }
-
-            return "Nonono";
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }

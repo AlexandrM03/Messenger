@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -57,11 +58,15 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
             RegistrationModel.RepeatPassword = passwordBox.Password;
 
             MessengerServiceClient client = new MessengerServiceClient();
-            client.Registration(registrationModel.Login,
+            string result = client.Registration(registrationModel.Login,
                 registrationModel.Password,
                 registrationModel.Name,
                 registrationModel.Surname,
-                "");
+                "123");
+            if (result != "Nice")
+            {
+                MessageBox.Show(result);
+            }
         }
     }
 }

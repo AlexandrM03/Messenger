@@ -18,7 +18,7 @@ namespace WCFService.DataBase
         public DbSet<Media> Medias { get; set; }
         public DbSet<Report> Reports { get; set; }
 
-        public Context() : base("DbConnection")
+        public Context() : base("DefaultConnection")
         { }
     }
 }
