@@ -1,4 +1,5 @@
 ﻿using MessengerClient.Logic.Model;
+using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,13 +47,28 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 return;
             }
 
-            Dictionary<string, string> userData;
-            
-            // TODO
+            MessengerServiceClient client = new MessengerServiceClient();
+            Dictionary<string, string> userData = client.Login(LoginModel.Login, LoginModel.Password);
+
+            UserModel user = new UserModel()
+            {
+                Id = Int32.Parse(userData["id"]),
+                Name = userData["name"],
+                Surname = userData["surname"],
+                Role = userData["role"],
+                Avatar = userData["path"]
+            };
+            CurrentUser.SetNewUser(user);
+
             if (CurrentUser.User.Role.Equals("user"))
             {
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
                 signWindow.Close();
-                return;
+            } // TODO
+            else
+            {
+                
             }
         }
     }

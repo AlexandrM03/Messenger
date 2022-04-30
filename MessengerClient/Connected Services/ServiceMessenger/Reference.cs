@@ -20,6 +20,12 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Registration", ReplyAction="http://tempuri.org/IMessengerService/RegistrationResponse")]
         System.Threading.Tasks.Task<string> RegistrationAsync(string login, string password, string name, string surname, string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Login", ReplyAction="http://tempuri.org/IMessengerService/LoginResponse")]
+        System.Collections.Generic.Dictionary<string, string> Login([System.ServiceModel.MessageParameterAttribute(Name="login")] string login1, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Login", ReplyAction="http://tempuri.org/IMessengerService/LoginResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string login, string password);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +61,14 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task<string> RegistrationAsync(string login, string password, string name, string surname, string path) {
             return base.Channel.RegistrationAsync(login, password, name, surname, path);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string> Login(string login1, string password) {
+            return base.Channel.Login(login1, password);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string login, string password) {
+            return base.Channel.LoginAsync(login, password);
         }
     }
 }

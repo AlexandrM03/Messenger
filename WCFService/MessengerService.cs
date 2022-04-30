@@ -36,5 +36,31 @@ namespace WCFService
                 return ex.Message;
             }
         }
+
+        public Dictionary<string, string> Login(string login, string password)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                string hashPassword = HashManager.GetHash(password);
+                int userAuthId = uow.UserAuthRepository.GetAll().Where(u => u.Login == login && u.Password == hashPassword).FirstOrDefault().Id;
+                User user = uow.UserRepository.GetAll().Where(u => u.UserAuth.Id == userAuthId).FirstOrDefault();
+                Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
+                if (user != null)
+                {
+                    Dictionary<string, string> result = new Dictionary<string, string>();
+                    result.Add("id", user.Id.ToString());
+                    result.Add("name", user.Name);
+                    result.Add("surname", user.Surname);
+                    result.Add("role", user.Role);
+                    result.Add("path", media.Path);
+
+                    return result;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
     }
 }
