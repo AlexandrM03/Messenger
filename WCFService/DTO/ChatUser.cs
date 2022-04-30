@@ -10,11 +10,8 @@ namespace WCFService.DTO
 {
     public class ChatUser
     {
-        [Key, Column(Order = 0)]
-        public int IdChat { get; set; }
+        public int Id { get; set; }
         public Chat Chat { get; set; }
-        [Key, Column(Order = 1)]
-        public int IdUser { get; set; }
         public User User { get; set; }
     }
 }

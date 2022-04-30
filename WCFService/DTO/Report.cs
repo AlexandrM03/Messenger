@@ -9,7 +9,6 @@ namespace WCFService.DTO
     public class Report
     {
         public int Id { get; set; }
-        public int IdMessage { get; set; }
         public Message Message { get; set; }
     }
 }

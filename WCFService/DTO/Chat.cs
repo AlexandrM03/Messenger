@@ -10,7 +10,6 @@ namespace WCFService.DTO
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string IdMedia { get; set; }
         public Media Media { get; set; }
     }
 }

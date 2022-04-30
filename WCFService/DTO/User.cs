@@ -12,9 +12,7 @@ namespace WCFService.DTO
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Role { get; set; }
-        public int IdMedia { get; set; }
         public Media Media { get; set; }
-        public int IdUserAuth { get; set; }
         public UserAuth UserAuth { get; set; }
     }
 }

@@ -21,13 +21,11 @@ namespace WCFService
                 using (UnitOfWork uow = new UnitOfWork())
                 {
                     string hashPassword = HashManager.GetHash(password);
-                    UserAuth userAuth = new UserAuth() { Login = login, Password = password };
+                    UserAuth userAuth = new UserAuth() { Login = login, Password = hashPassword };
                     Media media = new Media() { Path = path };
                     uow.UserAuthRepository.Add(userAuth);
                     uow.MediaRepository.Add(media);
-                    User user = new User() { Name = name, Surname = surname, Role = "user", IdMedia = media.Id, IdUserAuth = userAuth.Id };
-                    uow.UserRepository.Add(user);
-                    //User user = new User() { Id = 1, IdMedia = 1, IdUserAuth = 1, Name = name, Surname = surname, Role = "user" };
+                    User user = new User() { Name = name, Surname = surname, Role = "user", Media = media, UserAuth = userAuth };
                     uow.UserRepository.Add(user);
                     uow.Save();
                     return "Nice";
