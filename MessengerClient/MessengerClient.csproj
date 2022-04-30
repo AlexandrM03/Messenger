@@ -70,7 +70,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="CurrentUser.cs" />
+    <Compile Include="Logic\Model\LoginModel.cs" />
     <Compile Include="Logic\Model\RegistrationModel.cs" />
+    <Compile Include="Logic\Model\UserModel.cs" />
     <Compile Include="Logic\ViewModel\BaseVM.cs" />
     <Compile Include="Logic\ViewModel\DelegateCommand.cs" />
     <Compile Include="Logic\ViewModel\LoginVM\LoginVM.cs" />

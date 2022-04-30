@@ -42,7 +42,7 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10">
-            <TextBlock HorizontalAlignment="Center" Text="Registration"/>
+            <TextBlock HorizontalAlignment="Center" FontWeight="ExtraLight" FontSize="24" Text="Registration"/>
 
             <TextBlock Text="Login"/>
             <TextBox x:Name="login" Text="{Binding Path=RegistrationModel.Login}"/>
