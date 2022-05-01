@@ -63,5 +63,29 @@ namespace WCFService
                 }
             }
         }
+
+        public List<Dictionary<string, string>> GetUsers()
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+                List<User> users = uow.UserRepository.GetAll();
+                
+                foreach (User user in users)
+                {
+                    Dictionary<string, string> userDict = new Dictionary<string, string>();
+                    Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
+                    
+                    userDict.Add("id", user.Id.ToString());
+                    userDict.Add("name", user.Name);
+                    userDict.Add("surname", user.Surname);
+                    userDict.Add("role", user.Role);
+                    userDict.Add("path", media.Path);
+
+                    result.Add(userDict);
+                }
+                return result;
+            }
+        }
     }
 }

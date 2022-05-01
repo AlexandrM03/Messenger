@@ -15,5 +15,7 @@ namespace WCFService
         string Registration(string login, string password, string name, string surname, string path);
         [OperationContract]
         Dictionary<string, string> Login(string login, string password);
+        [OperationContract]
+        List<Dictionary<string, string>> GetUsers();
     }
 }

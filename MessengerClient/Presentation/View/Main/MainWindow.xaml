@@ -4,8 +4,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MessengerClient"
+        xmlns:vm="clr-namespace:MessengerClient.Logic.ViewModel.MainVM"
         mc:Ignorable="d"
         Title="MainWindow" Width="1280" Height="720">
+    <Window.DataContext>
+        <vm:MainVM/>
+    </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -23,8 +27,41 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
-            
-            
+
+            <!--Chats-->
+            <Grid Grid.Column="0" Background="{DynamicResource ChatsBackgroundBrush}">
+                <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                    <StackPanel x:Name="chats">
+                        <ItemsControl ItemsSource="{Binding Path=Chats}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                                        <Image Source="{Binding Path=Image}" Width="30" Height="30"/>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding Path=Name}"/>
+                                            <TextBlock Text="{Binding Path=LastMessage}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <!--MainFrame-->
+            <Frame Grid.Column="1"
+                   Content="{Binding Path=MainContent}"
+                   NavigationUIVisibility="Hidden"/>
+
+            <!--Navigation-->
+            <Grid Grid.Column="2" Background="{DynamicResource NavigationBrush}">
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <Button Background="Transparent" Width="50" Command="{Binding Path=GoToSearch}">
+                        <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\search_icon.png"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

@@ -4,5 +4,17 @@
                      Color="#242F3D"/>
 
     <SolidColorBrush x:Key="HighPanelTextBrush"
-                     Color="White"/>
+                     Color="White"/> 
+
+    <SolidColorBrush x:Key="MainBackgroundBrush"
+                     Color="#0E1621"/>
+
+    <SolidColorBrush x:Key="ChatsBackgroundBrush"
+                     Color="#17212B"/>
+
+    <SolidColorBrush x:Key="ChatBrush"
+                     Color="#2B5278"/>
+
+    <SolidColorBrush x:Key="NavigationBrush"
+                     Color="#17212B"/>
 </ResourceDictionary>
