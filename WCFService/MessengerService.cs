@@ -45,6 +45,7 @@ namespace WCFService
                 int userAuthId = uow.UserAuthRepository.GetAll().Where(u => u.Login == login && u.Password == hashPassword).FirstOrDefault().Id;
                 User user = uow.UserRepository.GetAll().Where(u => u.UserAuth.Id == userAuthId).FirstOrDefault();
                 Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
+
                 if (user != null)
                 {
                     Dictionary<string, string> result = new Dictionary<string, string>();

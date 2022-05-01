@@ -1,5 +1,6 @@
 ﻿using MessengerClient.Logic.Model;
 using MessengerClient.ServiceMessenger;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +38,27 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
         }
 
         public ICommand RegistrationCommand { get; private set; }
+        public ICommand OpenFileDialogCommand { get; private set; }
 
         public RegistrationVM()
         {
-            RegistrationModel = new RegistrationModel();
+            RegistrationModel = new RegistrationModel()
+            {
+                Path = @"D:\4 семестр\КП ООП\Messenger\Resources\default.png"
+            };
             RegistrationCommand = new DelegateCommand(Registration, CanRegistr);
+            OpenFileDialogCommand = new DelegateCommand(ChooseImage);
+        }
+
+        private void ChooseImage(object obj)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                RegistrationModel.Path = openFileDialog.FileName;
+            }
         }
 
         private bool CanRegistr(object obj)
@@ -62,7 +79,7 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 registrationModel.Password,
                 registrationModel.Name,
                 registrationModel.Surname,
-                "123");
+                registrationModel.Path);
             if (result != "Nice")
             {
                 MessageBox.Show(result);
