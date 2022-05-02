@@ -18,6 +18,8 @@ namespace WCFService
         [OperationContract]
         List<Dictionary<string, string>> GetUsers();
         [OperationContract]
-        void CreateChat(string name, string path, List<int> users);
+        void CreateChat(string name, string path, int admin, List<int> users);
+        [OperationContract]
+        List<Dictionary<string, string>> GetChats(int userId);
     }
 }

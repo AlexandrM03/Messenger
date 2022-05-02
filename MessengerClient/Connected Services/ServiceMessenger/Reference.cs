@@ -32,6 +32,18 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetUsersAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/CreateChat", ReplyAction="http://tempuri.org/IMessengerService/CreateChatResponse")]
+        void CreateChat(string name, string path, int admin, int[] users);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/CreateChat", ReplyAction="http://tempuri.org/IMessengerService/CreateChatResponse")]
+        System.Threading.Tasks.Task CreateChatAsync(string name, string path, int admin, int[] users);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetChats", ReplyAction="http://tempuri.org/IMessengerService/GetChatsResponse")]
+        System.Collections.Generic.Dictionary<string, string>[] GetChats(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetChats", ReplyAction="http://tempuri.org/IMessengerService/GetChatsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetChatsAsync(int userId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -83,6 +95,22 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetUsersAsync() {
             return base.Channel.GetUsersAsync();
+        }
+        
+        public void CreateChat(string name, string path, int admin, int[] users) {
+            base.Channel.CreateChat(name, path, admin, users);
+        }
+        
+        public System.Threading.Tasks.Task CreateChatAsync(string name, string path, int admin, int[] users) {
+            return base.Channel.CreateChatAsync(name, path, admin, users);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string>[] GetChats(int userId) {
+            return base.Channel.GetChats(userId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetChatsAsync(int userId) {
+            return base.Channel.GetChatsAsync(userId);
         }
     }
 }

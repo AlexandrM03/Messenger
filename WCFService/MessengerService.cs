@@ -88,24 +88,59 @@ namespace WCFService
             }
         }
 
-        public void CreateChat(string name, string path, List<int> users)
+        public void CreateChat(string name, string path, int admin, List<int> users)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
                 Media media = new Media() { Path = path };
-                Chat chat = new Chat() { Name = name, Media = media };
-
                 uow.MediaRepository.Add(media);
+
+                List<User> allUsers = uow.UserRepository.GetAll();
+                
+                User adminUser = allUsers.Where(u => u.Id == admin).FirstOrDefault();
+                Chat chat = new Chat() { Name = name, Admin = adminUser, Media = media };
                 uow.ChatRepository.Add(chat);
+
+                ChatUser adminOfChat = new ChatUser() { Chat = chat, User = adminUser };
+                uow.ChatUserRepository.Add(adminOfChat);
 
                 foreach (int userId in users)
                 {
-                    User user = uow.UserRepository.GetAll().Where(u => u.Id == userId).FirstOrDefault();
+                    User user = allUsers.Where(u => u.Id == userId).FirstOrDefault();
                     ChatUser chatUser = new ChatUser() { Chat = chat, User = user };
                     uow.ChatUserRepository.Add(chatUser);
                 }
 
                 uow.Save();
+            }
+        }
+
+        public List<Dictionary<string, string>> GetChats(int userId)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+                List<Chat> chats = uow.ChatRepository.GetAll();
+                List<Media> medias = uow.MediaRepository.GetAll();
+                
+                User currentUser = uow.UserRepository.GetAll().Where(u => u.Id == userId).FirstOrDefault();
+                
+                List<ChatUser> chatsOfUser = uow.ChatUserRepository.GetAll().Where(cu => cu.User == currentUser).ToList();
+
+                foreach (ChatUser chatUser in chatsOfUser)
+                {
+                    Dictionary<string, string> chatDict = new Dictionary<string, string>();
+                    Chat chat = chats.Where(c => c.Id == chatUser.Chat.Id).FirstOrDefault();
+                    Media media = medias.Where(m => m.Id == chat.Media.Id).FirstOrDefault();
+
+                    chatDict.Add("id", chat.Id.ToString());
+                    chatDict.Add("name", chat.Name);
+                    chatDict.Add("admin", chat.Admin.Id.ToString());
+                    chatDict.Add("path", media.Path);
+
+                    result.Add(chatDict);
+                }
+                return result;
             }
         }
     }

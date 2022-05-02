@@ -1,4 +1,5 @@
 ﻿using MessengerClient.Logic.Model;
+using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,20 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
             GoToAccount = new DelegateCommand(AcccountOpen);
             GoToSearch = new DelegateCommand(SearchOpen);
+
+            MessengerServiceClient client = new MessengerServiceClient();
+            chats = new List<ChatModel>();
+
+            foreach (Dictionary<string, string> chat in client.GetChats(CurrentUser.User.Id))
+            {
+                chats.Add(new ChatModel()
+                {
+                    Id = Int32.Parse(chat["id"]),
+                    Name = chat["name"],
+                    Admin = Int32.Parse(chat["admin"]),
+                    Image = chat["path"]
+                });
+            }
         }
 
         private void AcccountOpen(object obj)

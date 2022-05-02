@@ -54,6 +54,18 @@
   <wsdl:message name="IMessengerService_GetUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_CreateChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateChat" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_CreateChat_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateChatResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_GetChats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChats" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_GetChats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChatsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Registration">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Registration" message="tns:IMessengerService_Registration_InputMessage" />
@@ -66,6 +78,14 @@
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetUsers" message="tns:IMessengerService_GetUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetUsersResponse" message="tns:IMessengerService_GetUsers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/CreateChat" message="tns:IMessengerService_CreateChat_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatResponse" message="tns:IMessengerService_CreateChat_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetChats">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetChats" message="tns:IMessengerService_GetChats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetChatsResponse" message="tns:IMessengerService_GetChats_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -91,6 +111,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetUsers">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetUsers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateChat">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/CreateChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChats">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetChats" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

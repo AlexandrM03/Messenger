@@ -82,6 +82,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                 });
             }
             searchUsers = users;
+            chatModel = new ChatModel();
 
             SelectItemCommand = new DelegateCommand(SelectItem);
             SearchCommand = new DelegateCommand(Search);
@@ -102,14 +103,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
         private void CreateChat(object obj)
         {
-            List<int> users_id = new List<int>();
-            foreach (UserModel user in selectedUsers)
-            {
-                users_id.Add(user.Id);
-            }
+            int[] users_id = selectedUsers.Select(u => u.Id).ToArray();
 
             MessengerServiceClient client = new MessengerServiceClient();
-            //TODO
+            client.CreateChat(ChatModel.Name, ChatModel.Image, CurrentUser.User.Id, users_id);
         }
 
         private void ChooseImage(object obj)
