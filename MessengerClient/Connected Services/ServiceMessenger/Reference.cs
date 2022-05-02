@@ -26,6 +26,12 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Login", ReplyAction="http://tempuri.org/IMessengerService/LoginResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
+        System.Collections.Generic.Dictionary<string, string>[] GetUsers();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetUsersAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -69,6 +75,14 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string login, string password) {
             return base.Channel.LoginAsync(login, password);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string>[] GetUsers() {
+            return base.Channel.GetUsers();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetUsersAsync() {
+            return base.Channel.GetUsersAsync();
         }
     }
 }

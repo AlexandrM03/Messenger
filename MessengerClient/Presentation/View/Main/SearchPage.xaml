@@ -11,7 +11,46 @@
     <Page.DataContext>
         <vm:SearchVM/>
     </Page.DataContext>
-    <Grid>
-        
+    <Grid Background="{DynamicResource MainBackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="users">
+                    <ItemsControl ItemsSource="{Binding Path=Users}" x:Name="myItems">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="15">
+                                    <StackPanel.InputBindings>
+                                        <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SelectItemCommand}"
+                                                  CommandParameter="{Binding}"
+                                                  MouseAction="LeftClick"/>
+                                    </StackPanel.InputBindings>
+                                    <Image Source="{Binding Path=Avatar}" Width="100"/>
+                                    <StackPanel Orientation="Horizontal">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontSize" Value="32"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource HighPanelTextBrush}"/>
+                                            </Style>
+                                        </StackPanel.Resources>
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding Path=Surname}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            
+        </Grid>
     </Grid>
 </Page>

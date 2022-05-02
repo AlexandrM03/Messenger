@@ -18,9 +18,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         public MainNavigation()
         {
             account = new AccountPage();
+            search = new SearchPage();
             
             pages.Add("account", account);
-            pages.Add("search", new SearchPage());
+            pages.Add("search", search);
         }
 
         public Page GetPage(string name)
