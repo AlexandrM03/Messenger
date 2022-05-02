@@ -2,6 +2,7 @@
 using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,11 +13,12 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 {
     public class SearchVM : BaseVM
     {
-        private List<UserModel> users;
-        private List<UserModel> selectedUsers;
-        private Brush searchBackground;
+        private ObservableCollection<UserModel> users;
+        private ObservableCollection<UserModel> searchUsers;
+        private ObservableCollection<UserModel> selectedUsers;
+        private string searchText;
 
-        public List<UserModel> Users
+        public ObservableCollection<UserModel> Users
         {
             get => users; 
             set
@@ -26,22 +28,33 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             }
         }
 
-        public Brush SearchBackground
+        public ObservableCollection<UserModel> SelectedUsers
         {
-            get => searchBackground;
+            get => selectedUsers;
             set
             {
-                searchBackground = value;
+                selectedUsers = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string SearchText
+        {
+            get => searchText;
+            set
+            {
+                searchText = value;
                 OnPropertyChanged();
             }
         }
 
         public ICommand SelectItemCommand { get; set; }
+        public ICommand SearchCommand { get; set; }
 
         public SearchVM()
         {
-            selectedUsers = new List<UserModel>();
-            users = new List<UserModel>();
+            selectedUsers = new ObservableCollection<UserModel>();
+            users = new ObservableCollection<UserModel>();
             MessengerServiceClient client = new MessengerServiceClient();
             foreach (Dictionary<string, string> user in client.GetUsers())
             {
@@ -54,8 +67,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                     Avatar = user["path"]
                 });
             }
+            searchUsers = users;
 
             SelectItemCommand = new DelegateCommand(SelectItem);
+            SearchCommand = new DelegateCommand(Search);
         }
 
         private void SelectItem(object obj)
@@ -67,6 +82,18 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                 selectedUsers.Remove(user);
             else
                 selectedUsers.Add(user);
+        }
+
+        private void Search(object obj)
+        {
+            ObservableCollection<UserModel> temp = new ObservableCollection<UserModel>();
+            foreach (UserModel user in searchUsers)
+            {
+                if (user.Name.ToLower().Contains(SearchText.ToLower()) || user.Surname.ToLower().Contains(SearchText.ToLower()))
+                    temp.Add(user);
+            }
+
+            Users = temp;
         }
     }
 }

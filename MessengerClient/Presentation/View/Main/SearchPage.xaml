@@ -19,38 +19,67 @@
 
         <Grid Grid.Column="0">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <StackPanel x:Name="users">
-                    <ItemsControl ItemsSource="{Binding Path=Users}" x:Name="myItems">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="15">
-                                    <StackPanel.InputBindings>
-                                        <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SelectItemCommand}"
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox Height="40" Width="400" Margin="15"
+                     Text="{Binding Path=SearchText}"/>
+                        <Button Content="Search" Height="40" Width="100"
+                        Command="{Binding Path=SearchCommand}"/>
+                    </StackPanel>
+
+                    <StackPanel x:Name="users">
+                        <ItemsControl ItemsSource="{Binding Path=Users}" x:Name="myItems">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="15">
+                                        <StackPanel.InputBindings>
+                                            <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SelectItemCommand}"
                                                   CommandParameter="{Binding}"
                                                   MouseAction="LeftClick"/>
-                                    </StackPanel.InputBindings>
-                                    <Image Source="{Binding Path=Avatar}" Width="100"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <StackPanel.Resources>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="FontSize" Value="32"/>
-                                                <Setter Property="Foreground" Value="{DynamicResource HighPanelTextBrush}"/>
-                                            </Style>
-                                        </StackPanel.Resources>
-                                        <TextBlock Text="{Binding Path=Name}"/>
-                                        <TextBlock Text=" "/>
-                                        <TextBlock Text="{Binding Path=Surname}"/>
+                                        </StackPanel.InputBindings>
+                                        <Image Source="{Binding Path=Avatar}" Width="100"/>
+                                        <StackPanel Orientation="Horizontal">
+                                            <StackPanel.Resources>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="FontSize" Value="32"/>
+                                                    <Setter Property="Foreground" Value="{DynamicResource HighPanelTextBrush}"/>
+                                                </Style>
+                                            </StackPanel.Resources>
+                                            <TextBlock Text="{Binding Path=Name}"/>
+                                            <TextBlock Text=" "/>
+                                            <TextBlock Text="{Binding Path=Surname}"/>
+                                        </StackPanel>
                                     </StackPanel>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel>
+                    <ItemsControl ItemsSource="{Binding Path=SelectedUsers}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <StackPanel.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontSize" Value="16"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource HighPanelTextBrush}"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                    <TextBlock Text="{Binding Path=Name}"/>
+                                    <TextBlock Text=" "/>
+                                    <TextBlock Text="{Binding Path=Surname}"/>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
             </ScrollViewer>
-        </Grid>
-
-        <Grid Grid.Column="1">
-            
         </Grid>
     </Grid>
 </Page>
