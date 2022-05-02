@@ -1,5 +1,6 @@
 ﻿using MessengerClient.Logic.Model;
 using MessengerClient.ServiceMessenger;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         private ObservableCollection<UserModel> searchUsers;
         private ObservableCollection<UserModel> selectedUsers;
         private string searchText;
+        private ChatModel chatModel;
 
         public ObservableCollection<UserModel> Users
         {
@@ -48,8 +50,20 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             }
         }
 
+        public ChatModel ChatModel
+        {
+            get => chatModel;
+            set
+            {
+                chatModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand SelectItemCommand { get; set; }
         public ICommand SearchCommand { get; set; }
+        public ICommand CreateChatCommand { get; set; }
+        public ICommand ChooseImageCommand { get; set; }
 
         public SearchVM()
         {
@@ -71,6 +85,8 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
             SelectItemCommand = new DelegateCommand(SelectItem);
             SearchCommand = new DelegateCommand(Search);
+            CreateChatCommand = new DelegateCommand(CreateChat);
+            ChooseImageCommand = new DelegateCommand(ChooseImage);
         }
 
         private void SelectItem(object obj)
@@ -82,6 +98,29 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                 selectedUsers.Remove(user);
             else
                 selectedUsers.Add(user);
+        }
+
+        private void CreateChat(object obj)
+        {
+            List<int> users_id = new List<int>();
+            foreach (UserModel user in selectedUsers)
+            {
+                users_id.Add(user.Id);
+            }
+
+            MessengerServiceClient client = new MessengerServiceClient();
+            //TODO
+        }
+
+        private void ChooseImage(object obj)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                chatModel.Image = openFileDialog.FileName;
+            }
         }
 
         private void Search(object obj)

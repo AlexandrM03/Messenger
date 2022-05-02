@@ -59,7 +59,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding Path=OpenFileDialogCommand}" Content="Choose image"/>
                 <Image x:Name="path" 
-                       Source="{Binding Path=RegistrationModel.Path, UpdateSourceTrigger=PropertyChanged}"
+                       Source="{Binding Path=RegistrationModel.Path}"
                        Width="50" Height="50"/>
             </StackPanel>
 

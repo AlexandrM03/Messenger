@@ -17,5 +17,7 @@ namespace WCFService
         Dictionary<string, string> Login(string login, string password);
         [OperationContract]
         List<Dictionary<string, string>> GetUsers();
+        [OperationContract]
+        void CreateChat(string name, string path, List<int> users);
     }
 }

@@ -87,5 +87,26 @@ namespace WCFService
                 return result;
             }
         }
+
+        public void CreateChat(string name, string path, List<int> users)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Media media = new Media() { Path = path };
+                Chat chat = new Chat() { Name = name, Media = media };
+
+                uow.MediaRepository.Add(media);
+                uow.ChatRepository.Add(chat);
+
+                foreach (int userId in users)
+                {
+                    User user = uow.UserRepository.GetAll().Where(u => u.Id == userId).FirstOrDefault();
+                    ChatUser chatUser = new ChatUser() { Chat = chat, User = user };
+                    uow.ChatUserRepository.Add(chatUser);
+                }
+
+                uow.Save();
+            }
+        }
     }
 }
