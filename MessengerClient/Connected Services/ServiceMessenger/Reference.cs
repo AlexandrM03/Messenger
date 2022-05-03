@@ -12,7 +12,7 @@ namespace MessengerClient.ServiceMessenger {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMessenger.IMessengerService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceMessenger.IMessengerService", CallbackContract=typeof(MessengerClient.ServiceMessenger.IMessengerServiceCallback))]
     public interface IMessengerService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Registration", ReplyAction="http://tempuri.org/IMessengerService/RegistrationResponse")]
@@ -26,6 +26,12 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Login", ReplyAction="http://tempuri.org/IMessengerService/LoginResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string login, string password);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Disconnect", ReplyAction="http://tempuri.org/IMessengerService/DisconnectResponse")]
+        void Disconnect(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/Disconnect", ReplyAction="http://tempuri.org/IMessengerService/DisconnectResponse")]
+        System.Threading.Tasks.Task DisconnectAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
         System.Collections.Generic.Dictionary<string, string>[] GetUsers();
@@ -47,30 +53,38 @@ namespace MessengerClient.ServiceMessenger {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public interface IMessengerServiceCallback {
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/CreateChatCallback")]
+        void CreateChatCallback(int id, string name, int admin, string path);
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IMessengerServiceChannel : MessengerClient.ServiceMessenger.IMessengerService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MessengerServiceClient : System.ServiceModel.ClientBase<MessengerClient.ServiceMessenger.IMessengerService>, MessengerClient.ServiceMessenger.IMessengerService {
+    public partial class MessengerServiceClient : System.ServiceModel.DuplexClientBase<MessengerClient.ServiceMessenger.IMessengerService>, MessengerClient.ServiceMessenger.IMessengerService {
         
-        public MessengerServiceClient() {
+        public MessengerServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
+                base(callbackInstance) {
         }
         
-        public MessengerServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+        public MessengerServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
+                base(callbackInstance, endpointConfigurationName) {
         }
         
-        public MessengerServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public MessengerServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public MessengerServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+        public MessengerServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, endpointConfigurationName, remoteAddress) {
         }
         
-        public MessengerServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+        public MessengerServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(callbackInstance, binding, remoteAddress) {
         }
         
         public string Registration(string login, string password, string name, string surname, string path) {
@@ -87,6 +101,14 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>> LoginAsync(string login, string password) {
             return base.Channel.LoginAsync(login, password);
+        }
+        
+        public void Disconnect(int id) {
+            base.Channel.Disconnect(id);
+        }
+        
+        public System.Threading.Tasks.Task DisconnectAsync(int id) {
+            return base.Channel.DisconnectAsync(id);
         }
         
         public System.Collections.Generic.Dictionary<string, string>[] GetUsers() {

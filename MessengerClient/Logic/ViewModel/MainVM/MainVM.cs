@@ -2,6 +2,7 @@
 using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,9 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         private Page mainContent;
 
         private MainNavigation navigation;
-        private List<ChatModel> chats;
+        private ObservableCollection<ChatModel> chats;
 
-        public List<ChatModel> Chats
+        public ObservableCollection<ChatModel> Chats
         {
             get => chats;
             set
@@ -50,10 +51,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             GoToAccount = new DelegateCommand(AcccountOpen);
             GoToSearch = new DelegateCommand(SearchOpen);
 
-            MessengerServiceClient client = new MessengerServiceClient();
-            chats = new List<ChatModel>();
+            chats = new ObservableCollection<ChatModel>();
 
-            foreach (Dictionary<string, string> chat in client.GetChats(CurrentUser.User.Id))
+            CurrentClient.SetMainVM(this);
+            foreach (Dictionary<string, string> chat in CurrentClient.Client.GetChats(CurrentUser.User.Id))
             {
                 chats.Add(new ChatModel()
                 {

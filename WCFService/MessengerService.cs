@@ -13,6 +13,8 @@ namespace WCFService
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
     public class MessengerService : IMessengerService
     {
+        private List<ServerUser> connectedUsers = new List<ServerUser>();
+        
         public string Registration(string login, string password, string name, string surname, string path)
         {
             // validate TODO
@@ -44,10 +46,16 @@ namespace WCFService
                 string hashPassword = HashManager.GetHash(password);
                 int userAuthId = uow.UserAuthRepository.GetAll().Where(u => u.Login == login && u.Password == hashPassword).FirstOrDefault().Id;
                 User user = uow.UserRepository.GetAll().Where(u => u.UserAuth.Id == userAuthId).FirstOrDefault();
-                Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
 
                 if (user != null)
                 {
+                    connectedUsers.Add(new ServerUser
+                    {
+                        Id = user.Id,
+                        OperationContext = OperationContext.Current
+                    });
+                    
+                    Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
                     Dictionary<string, string> result = new Dictionary<string, string>();
                     result.Add("id", user.Id.ToString());
                     result.Add("name", user.Name);
@@ -62,6 +70,11 @@ namespace WCFService
                     return null;
                 }
             }
+        }
+
+        public void Disconnect(int id)
+        {
+            connectedUsers.Remove(connectedUsers.Where(u => u.Id == id).FirstOrDefault());
         }
 
         public List<Dictionary<string, string>> GetUsers()
@@ -109,7 +122,16 @@ namespace WCFService
                     User user = allUsers.Where(u => u.Id == userId).FirstOrDefault();
                     ChatUser chatUser = new ChatUser() { Chat = chat, User = user };
                     uow.ChatUserRepository.Add(chatUser);
+
+                    ServerUser connectedUser = connectedUsers.Where(u => u.Id == userId).FirstOrDefault();
+                    if (connectedUser != null)
+                    {
+                        connectedUser.OperationContext.GetCallbackChannel<IMessengerCallback>().CreateChatCallback(chat.Id, chat.Name, adminUser.Id, media.Path);
+                    }
                 }
+
+                ServerUser connectedUserCreator = connectedUsers.Where(u => u.Id == admin).FirstOrDefault();
+                connectedUserCreator.OperationContext.GetCallbackChannel<IMessengerCallback>().CreateChatCallback(chat.Id, chat.Name, adminUser.Id, media.Path);
 
                 uow.Save();
             }

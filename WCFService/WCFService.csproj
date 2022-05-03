@@ -68,6 +68,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Repository\Repository.cs" />
+    <Compile Include="ServerUser.cs" />
     <Compile Include="Unit\UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -69,8 +69,8 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         {
             selectedUsers = new ObservableCollection<UserModel>();
             users = new ObservableCollection<UserModel>();
-            MessengerServiceClient client = new MessengerServiceClient();
-            foreach (Dictionary<string, string> user in client.GetUsers())
+            //MessengerServiceClient client = new MessengerServiceClient(null);
+            foreach (Dictionary<string, string> user in CurrentClient.Client.GetUsers())
             {
                 users.Add(new UserModel()
                 {
@@ -101,12 +101,12 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                 selectedUsers.Add(user);
         }
 
-        private void CreateChat(object obj)
+        private async void CreateChat(object obj)
         {
             int[] users_id = selectedUsers.Select(u => u.Id).ToArray();
 
-            MessengerServiceClient client = new MessengerServiceClient();
-            client.CreateChat(ChatModel.Name, ChatModel.Image, CurrentUser.User.Id, users_id);
+            //MessengerServiceClient client = new MessengerServiceClient(null);
+            await Task.Factory.StartNew(() => CurrentClient.Client.CreateChat(ChatModel.Name, ChatModel.Image, CurrentUser.User.Id, users_id));
         }
 
         private void ChooseImage(object obj)

@@ -47,8 +47,8 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 return;
             }
 
-            MessengerServiceClient client = new MessengerServiceClient();
-            Dictionary<string, string> userData = client.Login(LoginModel.Login, LoginModel.Password);
+            //MessengerServiceClient client = new MessengerServiceClient();
+            Dictionary<string, string> userData = CurrentClient.Client.Login(LoginModel.Login, LoginModel.Password);
 
             UserModel user = new UserModel()
             {
