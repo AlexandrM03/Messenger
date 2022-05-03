@@ -63,17 +63,26 @@
   <wsdl:message name="IMessengerService_CreateChat_InputMessage">
     <wsdl:part name="parameters" element="tns:CreateChat" />
   </wsdl:message>
-  <wsdl:message name="IMessengerService_CreateChat_OutputMessage">
-    <wsdl:part name="parameters" element="tns:CreateChatResponse" />
-  </wsdl:message>
   <wsdl:message name="IMessengerService_GetChats_InputMessage">
     <wsdl:part name="parameters" element="tns:GetChats" />
   </wsdl:message>
   <wsdl:message name="IMessengerService_GetChats_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetChatsResponse" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_GetMessages_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessages" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_GetMessages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMessagesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_SendMessage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendMessage" />
+  </wsdl:message>
   <wsdl:message name="IMessengerService_CreateChatCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CreateChatCallback" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_SendMessageCallback_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendMessageCallback" />
   </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Registration">
@@ -94,14 +103,23 @@
     </wsdl:operation>
     <wsdl:operation name="CreateChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/CreateChat" message="tns:IMessengerService_CreateChat_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatResponse" message="tns:IMessengerService_CreateChat_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetChats">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetChats" message="tns:IMessengerService_GetChats_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetChatsResponse" message="tns:IMessengerService_GetChats_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetMessages" message="tns:IMessengerService_GetMessages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetMessagesResponse" message="tns:IMessengerService_GetMessages_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/SendMessage" message="tns:IMessengerService_SendMessage_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatCallback" message="tns:IMessengerService_CreateChatCallback_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCallback">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/SendMessageCallback" message="tns:IMessengerService_SendMessageCallback_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -148,9 +166,6 @@
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
     </wsdl:operation>
     <wsdl:operation name="GetChats">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetChats" style="document" />
@@ -161,8 +176,29 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetMessages">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetMessages" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessage">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/SendMessage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/CreateChatCallback" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendMessageCallback">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/SendMessageCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -22,6 +22,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             
             pages.Add("account", account);
             pages.Add("search", search);
+            pages.Add("chat", new ChatPage());
         }
 
         public Page GetPage(string name)

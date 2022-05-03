@@ -32,10 +32,15 @@
             <Grid Grid.Column="0" Background="{DynamicResource ChatsBackgroundBrush}">
                 <ScrollViewer VerticalScrollBarVisibility="Hidden">
                     <StackPanel x:Name="chats">
-                        <ItemsControl ItemsSource="{Binding Path=Chats}">
+                        <ItemsControl ItemsSource="{Binding Path=Chats}" x:Name="myItems">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                                        <StackPanel.InputBindings>
+                                            <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.GoToChat}"
+                                                  CommandParameter="{Binding}"
+                                                  MouseAction="LeftClick"/>
+                                        </StackPanel.InputBindings>
                                         <Image Source="{Binding Path=Image}" Width="30" Height="30"/>
                                         <StackPanel Orientation="Vertical">
                                             <TextBlock Text="{Binding Path=Name}"/>

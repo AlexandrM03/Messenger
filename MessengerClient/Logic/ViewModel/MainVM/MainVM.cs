@@ -41,6 +41,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         // Navigation commands
         public ICommand GoToAccount { get; private set; }
         public ICommand GoToSearch { get; private set; }
+        public ICommand GoToChat { get; private set; }
 
         public MainVM()
         {
@@ -50,6 +51,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
             GoToAccount = new DelegateCommand(AcccountOpen);
             GoToSearch = new DelegateCommand(SearchOpen);
+            GoToChat = new DelegateCommand(ChatOpen);
 
             chats = new ObservableCollection<ChatModel>();
 
@@ -74,6 +76,32 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         private void SearchOpen(object obj)
         {
             MainContent = navigation.GetPage("search");
+        }
+
+        private void ChatOpen(object obj)
+        {
+            if (!(obj is ChatModel chat))
+                return;
+
+            CurrentChat.SetNewChat(chat);
+            CurrentClient.Callback.ChatVM.Chat = chat;
+
+            List<Dictionary<string, string>> messagesDictionary = CurrentClient.Client.GetMessages(chat.Id).ToList();
+            ObservableCollection<MessageModel> messages = new ObservableCollection<MessageModel>();
+            foreach (Dictionary<string, string> message in messagesDictionary)
+            {
+                messages.Add(new MessageModel()
+                {
+                    Id = Int32.Parse(message["id"]),
+                    Name = message["name"],
+                    Surname = message["surname"],
+                    Avatar = message["path"],
+                    Text = message["text"],
+                    Date = message["date"]
+                });
+            }
+            CurrentClient.Callback.ChatVM.Messages = messages;
+            MainContent = navigation.GetPage("chat");
         }
     }
 }

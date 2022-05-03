@@ -18,5 +18,10 @@ namespace MessengerClient
         {
             Callback.MainVM = mainVM;
         }
+
+        public static void SetChatVM(ChatVM chatVM)
+        {
+            Callback.ChatVM = chatVM;
+        }
     }
 }

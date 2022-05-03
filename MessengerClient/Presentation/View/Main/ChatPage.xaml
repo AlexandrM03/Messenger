@@ -12,6 +12,54 @@
         <vm:ChatVM/>
     </Page.DataContext>
     <Grid Background="{DynamicResource MainBackgroundBrush}">
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <TextBlock Text="{Binding Path=Chat.Name}" Foreground="{DynamicResource HighPanelTextBrush}" Margin="5"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="messages">
+                    <ItemsControl ItemsSource="{Binding Path=Messages}" x:Name="myItems">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                                    <!--<StackPanel.InputBindings>
+                                        <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SendMessageCommand}"
+                                                  CommandParameter="{Binding}"
+                                                  MouseAction="LeftClick"/>
+                                    </StackPanel.InputBindings>-->
+                                    <Image Source="{Binding Path=Avatar}" Width="30" Height="30"/>
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding Path=Name}"/>
+                                            <TextBlock Text=" "/>
+                                            <TextBlock Text="{Binding Path=Surname}"/>
+                                            <TextBlock Text=" "/>
+                                            <TextBlock Text="{Binding Path=Date}"/>
+                                        </StackPanel>
+                                        <TextBlock Text="{Binding Path=Text}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Image" Width="50" Margin="5"/>
+                <TextBox Text="{Binding Path=Message.Text}" Margin="5" Width="800"/>
+                <Button Content="Send" Width="50" Margin="5"
+                        Command="{Binding Path=SendMessageCommand}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Page>

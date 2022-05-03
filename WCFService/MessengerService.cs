@@ -165,5 +165,58 @@ namespace WCFService
                 return result;
             }
         }
+
+        public List<Dictionary<string, string>> GetMessages(int chatId)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+                List<Message> messages = uow.MessageRepository.GetAll().Where(m => m.Chat.Id == chatId).ToList();
+                List<User> users = uow.UserRepository.GetAll();
+                List<Media> medias = uow.MediaRepository.GetAll();
+
+                foreach (Message message in messages)
+                {
+                    Dictionary<string, string> messageDict = new Dictionary<string, string>();
+                    User user = users.Where(u => u.Id == message.User.Id).FirstOrDefault();
+                    Media media = medias.Where(m => m.Id == user.Media.Id).FirstOrDefault();
+
+                    messageDict.Add("id", message.Id.ToString());
+                    messageDict.Add("name", user.Name);
+                    messageDict.Add("surname", user.Surname);
+                    messageDict.Add("path", media.Path);
+                    messageDict.Add("text", message.Text);
+                    messageDict.Add("date", message.Date.ToString());
+
+                    result.Add(messageDict);
+                }
+                return result;
+            }
+        }
+
+        public void SendMessage(string text, DateTime dateTime, int senderId, int chatId)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                User sender = uow.UserRepository.GetAll().Where(u => u.Id == senderId).FirstOrDefault();
+                Media media = uow.MediaRepository.GetAll().Where(m => m.Id == sender.Media.Id).FirstOrDefault();
+                Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chatId).FirstOrDefault();
+                Message message = new Message() { Text = text, Date = dateTime, User = sender, Chat = chat };
+                uow.MessageRepository.Add(message);
+
+                List<int> retrievers = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat).Select(cu => cu.User.Id).ToList();
+                foreach (int userId in retrievers)
+                {
+                    ServerUser connectedUser = connectedUsers.Where(u => u.Id == userId).FirstOrDefault();
+                    if (connectedUser != null)
+                    {
+                        connectedUser.OperationContext.GetCallbackChannel<IMessengerCallback>()
+                            .SendMessageCallback(message.Id, message.Text, message.Date, sender.Name, sender.Surname, media.Path, chatId);
+                    }
+                }
+
+                uow.Save();
+            }
+        }
     }
 }

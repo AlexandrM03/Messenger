@@ -39,10 +39,10 @@ namespace MessengerClient.ServiceMessenger {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetUsers", ReplyAction="http://tempuri.org/IMessengerService/GetUsersResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetUsersAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/CreateChat", ReplyAction="http://tempuri.org/IMessengerService/CreateChatResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/CreateChat")]
         void CreateChat(string name, string path, int admin, int[] users);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/CreateChat", ReplyAction="http://tempuri.org/IMessengerService/CreateChatResponse")]
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/CreateChat")]
         System.Threading.Tasks.Task CreateChatAsync(string name, string path, int admin, int[] users);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetChats", ReplyAction="http://tempuri.org/IMessengerService/GetChatsResponse")]
@@ -50,6 +50,18 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetChats", ReplyAction="http://tempuri.org/IMessengerService/GetChatsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetChatsAsync(int userId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
+        System.Collections.Generic.Dictionary<string, string>[] GetMessages(int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetMessages", ReplyAction="http://tempuri.org/IMessengerService/GetMessagesResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetMessagesAsync(int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendMessage")]
+        void SendMessage(string text, System.DateTime dateTime, int senderId, int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendMessage")]
+        System.Threading.Tasks.Task SendMessageAsync(string text, System.DateTime dateTime, int senderId, int chatId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -57,6 +69,9 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/CreateChatCallback")]
         void CreateChatCallback(int id, string name, int admin, string path);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendMessageCallback")]
+        void SendMessageCallback(int id, string text, System.DateTime date, string name, string surname, string avatar, int chatId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -133,6 +148,22 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetChatsAsync(int userId) {
             return base.Channel.GetChatsAsync(userId);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string>[] GetMessages(int chatId) {
+            return base.Channel.GetMessages(chatId);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetMessagesAsync(int chatId) {
+            return base.Channel.GetMessagesAsync(chatId);
+        }
+        
+        public void SendMessage(string text, System.DateTime dateTime, int senderId, int chatId) {
+            base.Channel.SendMessage(text, dateTime, senderId, chatId);
+        }
+        
+        public System.Threading.Tasks.Task SendMessageAsync(string text, System.DateTime dateTime, int senderId, int chatId) {
+            return base.Channel.SendMessageAsync(text, dateTime, senderId, chatId);
         }
     }
 }

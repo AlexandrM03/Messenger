@@ -23,11 +23,17 @@ namespace WCFService
         void CreateChat(string name, string path, int admin, List<int> users);
         [OperationContract]
         List<Dictionary<string, string>> GetChats(int userId);
+        [OperationContract]
+        List<Dictionary<string, string>> GetMessages(int chatId);
+        [OperationContract(IsOneWay = true)]
+        void SendMessage(string text, DateTime dateTime, int senderId, int chatId);
     }
 
     public interface IMessengerCallback
     {
         [OperationContract(IsOneWay = true)]
         void CreateChatCallback(int id, string name, int admin, string path);
+        [OperationContract(IsOneWay = true)]
+        void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId);
     }
 }
