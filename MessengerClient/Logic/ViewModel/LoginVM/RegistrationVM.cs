@@ -74,7 +74,6 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
             RegistrationModel.Password = passwordBox.Password;
             RegistrationModel.RepeatPassword = passwordBox.Password;
 
-            //MessengerServiceClient client = new MessengerServiceClient(null);
             string result = CurrentClient.Client.Registration(registrationModel.Login,
                 registrationModel.Password,
                 registrationModel.Name,

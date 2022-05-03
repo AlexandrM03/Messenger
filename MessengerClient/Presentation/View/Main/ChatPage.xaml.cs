@@ -13,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MessengerClient
+namespace MessengerClient.Presentation.View.Main
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ChatPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ChatPage : Page
     {
-        public MainWindow()
+        public ChatPage()
         {
             InitializeComponent();
-        }
-
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            CurrentClient.Client.Disconnect(CurrentUser.User.Id);
-
-            base.OnClosing(e);
         }
     }
 }
