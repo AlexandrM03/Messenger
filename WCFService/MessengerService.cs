@@ -171,7 +171,8 @@ namespace WCFService
             using (UnitOfWork uow = new UnitOfWork())
             {
                 List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
-                List<Message> messages = uow.MessageRepository.GetAll().Where(m => m.Chat.Id == chatId).ToList();
+                Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chatId).FirstOrDefault();
+                List<Message> messages = uow.MessageRepository.GetAll().Where(m => m.Chat == chat).ToList();
                 List<User> users = uow.UserRepository.GetAll();
                 List<Media> medias = uow.MediaRepository.GetAll();
 
@@ -201,6 +202,7 @@ namespace WCFService
                 User sender = uow.UserRepository.GetAll().Where(u => u.Id == senderId).FirstOrDefault();
                 Media media = uow.MediaRepository.GetAll().Where(m => m.Id == sender.Media.Id).FirstOrDefault();
                 Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chatId).FirstOrDefault();
+                string sqlFormattedDate = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
                 Message message = new Message() { Text = text, Date = dateTime, User = sender, Chat = chat };
                 uow.MessageRepository.Add(message);
 
