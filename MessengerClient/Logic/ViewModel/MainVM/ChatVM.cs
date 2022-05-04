@@ -60,8 +60,8 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
         private void SendMessage(object obj)
         {
-            //Task.Factory.StartNew(() => CurrentClient.Client.SendMessage(Message.Text, new DateTime(), CurrentUser.User.Id, Chat.Id));
-            CurrentClient.Client.SendMessage(Message.Text, new DateTime(), CurrentUser.User.Id, Chat.Id);
+            Task.Factory.StartNew(() => CurrentClient.Client.SendMessage(Message.Text, DateTime.Now, CurrentUser.User.Id, Chat.Id));
+            //CurrentClient.Client.SendMessage(Message.Text, DateTime.Now, CurrentUser.User.Id, Chat.Id);
         }
     }
 }
