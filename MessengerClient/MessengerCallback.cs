@@ -1,4 +1,5 @@
 ﻿using MessengerClient.Logic.Model;
+using MessengerClient.Logic.ViewModel.AdminVM;
 using MessengerClient.Logic.ViewModel.MainVM;
 using MessengerClient.ServiceMessenger;
 using System;
@@ -13,6 +14,18 @@ namespace MessengerClient
     {
         public MainVM MainVM { get; set; }
         public ChatVM ChatVM { get; set; }
+        public OnlineUsersVM OnlineUsersVM { get; set; }
+
+        public void AdminUpdate(int id, string name, string surname, string message)
+        {
+            OnlineUsersVM.UserInfo.Add(new AdminInfoModel()
+            {
+                Id = id,
+                Name = name,
+                Surname = surname,
+                Message = message
+            });
+        }
 
         public void CreateChatCallback(int id, string name, int admin, string path)
         {

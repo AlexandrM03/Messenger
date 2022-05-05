@@ -89,6 +89,7 @@
     <Compile Include="CurrentChat.cs" />
     <Compile Include="CurrentClient.cs" />
     <Compile Include="CurrentUser.cs" />
+    <Compile Include="Logic\Model\AdminInfoModel.cs" />
     <Compile Include="Logic\Model\ChatModel.cs" />
     <Compile Include="Logic\Model\ClientModel.cs" />
     <Compile Include="Logic\Model\LoginModel.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Logic\Model\UserModel.cs" />
     <Compile Include="Logic\ViewModel\AdminVM\AdminNavigation.cs" />
     <Compile Include="Logic\ViewModel\AdminVM\AdminVM.cs" />
+    <Compile Include="Logic\ViewModel\AdminVM\OnlineUsersVM.cs" />
     <Compile Include="Logic\ViewModel\BaseVM.cs" />
     <Compile Include="Logic\ViewModel\DelegateCommand.cs" />
     <Compile Include="Logic\ViewModel\LoginVM\LoginVM.cs" />

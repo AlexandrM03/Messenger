@@ -1,4 +1,5 @@
 ﻿using MessengerClient.Logic.Model;
+using MessengerClient.Presentation.View.Admin;
 using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
@@ -68,7 +69,9 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
             } // TODO
             else
             {
-                
+                Admin admin = new Admin();
+                admin.Show();
+                signWindow.Close();
             }
         }
     }

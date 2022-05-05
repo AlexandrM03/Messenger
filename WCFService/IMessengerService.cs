@@ -35,5 +35,7 @@ namespace WCFService
         void CreateChatCallback(int id, string name, int admin, string path);
         [OperationContract(IsOneWay = true)]
         void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId);
+        [OperationContract(IsOneWay = true)]
+        void AdminUpdate(int id, string name, string surname, string message);
     }
 }

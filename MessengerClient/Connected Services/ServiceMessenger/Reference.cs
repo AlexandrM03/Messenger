@@ -72,6 +72,9 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendMessageCallback")]
         void SendMessageCallback(int id, string text, System.DateTime date, string name, string surname, string avatar, int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/AdminUpdate")]
+        void AdminUpdate(int id, string name, string surname, string message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]

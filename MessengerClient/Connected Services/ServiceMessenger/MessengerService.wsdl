@@ -84,6 +84,9 @@
   <wsdl:message name="IMessengerService_SendMessageCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:SendMessageCallback" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_AdminUpdate_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AdminUpdate" />
+  </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Registration">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/Registration" message="tns:IMessengerService_Registration_InputMessage" />
@@ -120,6 +123,9 @@
     </wsdl:operation>
     <wsdl:operation name="SendMessageCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/SendMessageCallback" message="tns:IMessengerService_SendMessageCallback_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AdminUpdate">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/AdminUpdate" message="tns:IMessengerService_AdminUpdate_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -199,6 +205,12 @@
     </wsdl:operation>
     <wsdl:operation name="SendMessageCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/SendMessageCallback" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AdminUpdate">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/AdminUpdate" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

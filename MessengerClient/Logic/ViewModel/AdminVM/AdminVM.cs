@@ -11,7 +11,7 @@ namespace MessengerClient.Logic.ViewModel.AdminVM
     public class AdminVM : BaseVM
     {
         private Page mainContent;
-        private AdminNavigation navigation;
+        private readonly AdminNavigation navigation;
 
         public Page MainContent
         {

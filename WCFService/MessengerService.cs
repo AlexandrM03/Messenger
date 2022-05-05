@@ -14,6 +14,7 @@ namespace WCFService
     public class MessengerService : IMessengerService
     {
         private List<ServerUser> connectedUsers = new List<ServerUser>();
+        private List<ServerUser> connectedAdmins = new List<ServerUser>();
         
         public string Registration(string login, string password, string name, string surname, string path)
         {
@@ -49,11 +50,25 @@ namespace WCFService
 
                 if (user != null)
                 {
-                    connectedUsers.Add(new ServerUser
+                    if (user.Role == "admin")
+                        connectedAdmins.Add(new ServerUser
+                        {
+                            Id = user.Id,
+                            OperationContext = OperationContext.Current
+                        });
+                    else
                     {
-                        Id = user.Id,
-                        OperationContext = OperationContext.Current
-                    });
+                        foreach (var userAdmin in connectedAdmins)
+                        {
+                            userAdmin.OperationContext.GetCallbackChannel<IMessengerCallback>().AdminUpdate(user.Id, user.Name, user.Surname, "connected");
+                        }
+
+                        connectedUsers.Add(new ServerUser
+                        {
+                            Id = user.Id,
+                            OperationContext = OperationContext.Current
+                        });
+                    }
                     
                     Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
                     Dictionary<string, string> result = new Dictionary<string, string>();
@@ -74,7 +89,23 @@ namespace WCFService
 
         public void Disconnect(int id)
         {
-            connectedUsers.Remove(connectedUsers.Where(u => u.Id == id).FirstOrDefault());
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                User user = uow.UserRepository.GetAll().Where(u => u.Id == id).FirstOrDefault();
+                if (user.Role == "user")
+                {
+                    connectedUsers.Remove(connectedUsers.Where(u => u.Id == id).FirstOrDefault());
+
+                    foreach (var userAdmin in connectedAdmins)
+                    {
+                        userAdmin.OperationContext.GetCallbackChannel<IMessengerCallback>().AdminUpdate(user.Id, user.Name, user.Surname, "disconnected");
+                    }
+                }
+                else
+                {
+                    connectedAdmins.Remove(connectedAdmins.Where(u => u.Id == id).FirstOrDefault());
+                }
+            }
         }
 
         public List<Dictionary<string, string>> GetUsers()

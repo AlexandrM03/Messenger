@@ -1,4 +1,5 @@
 ﻿using MessengerClient.Logic.Model;
+using MessengerClient.Logic.ViewModel.AdminVM;
 using MessengerClient.Logic.ViewModel.MainVM;
 using MessengerClient.ServiceMessenger;
 using System;
@@ -22,6 +23,11 @@ namespace MessengerClient
         public static void SetChatVM(ChatVM chatVM)
         {
             Callback.ChatVM = chatVM;
+        }
+
+        public static void SetOnlineVM(OnlineUsersVM onlineUsersVM)
+        {
+            Callback.OnlineUsersVM = onlineUsersVM;
         }
     }
 }
