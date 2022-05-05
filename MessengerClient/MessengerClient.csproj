@@ -57,6 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Presentation\View\Admin\Admin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Presentation\View\Admin\OnlineUsersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\View\Main\AccountPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -87,6 +95,8 @@
     <Compile Include="Logic\Model\MessageModel.cs" />
     <Compile Include="Logic\Model\RegistrationModel.cs" />
     <Compile Include="Logic\Model\UserModel.cs" />
+    <Compile Include="Logic\ViewModel\AdminVM\AdminNavigation.cs" />
+    <Compile Include="Logic\ViewModel\AdminVM\AdminVM.cs" />
     <Compile Include="Logic\ViewModel\BaseVM.cs" />
     <Compile Include="Logic\ViewModel\DelegateCommand.cs" />
     <Compile Include="Logic\ViewModel\LoginVM\LoginVM.cs" />
@@ -99,6 +109,12 @@
     <Compile Include="Logic\ViewModel\MainVM\MainVM.cs" />
     <Compile Include="Logic\ViewModel\MainVM\SearchVM.cs" />
     <Compile Include="MessengerCallback.cs" />
+    <Compile Include="Presentation\View\Admin\Admin.xaml.cs">
+      <DependentUpon>Admin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\View\Admin\OnlineUsersPage.xaml.cs">
+      <DependentUpon>OnlineUsersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation\View\Main\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
