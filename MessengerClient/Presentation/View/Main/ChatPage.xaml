@@ -28,13 +28,13 @@
                     <ItemsControl ItemsSource="{Binding Path=Messages}" x:Name="myItems">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                                <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}" Margin="3">
                                     <!--<StackPanel.InputBindings>
                                         <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SendMessageCommand}"
                                                   CommandParameter="{Binding}"
                                                   MouseAction="LeftClick"/>
                                     </StackPanel.InputBindings>-->
-                                    <Image Source="{Binding Path=Avatar}" Width="30" Height="30"/>
+                                    <Image Source="{Binding Path=Avatar}" Width="30" Height="30" VerticalAlignment="Top"/>
                                     <StackPanel Orientation="Vertical">
                                         <StackPanel Orientation="Horizontal">
                                             <TextBlock Text="{Binding Path=Name}"/>
@@ -44,6 +44,7 @@
                                             <TextBlock Text="{Binding Path=Date}"/>
                                         </StackPanel>
                                         <TextBlock Text="{Binding Path=Text}"/>
+                                        <Image Source="{Binding Path=Path}" MaxHeight="100"/>
                                     </StackPanel>
                                 </StackPanel>
                             </DataTemplate>
@@ -55,7 +56,7 @@
 
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Image" Width="50" Margin="5"/>
+                <Button Content="Image" Width="50" Margin="5" Command="{Binding Path=SendImageCommand}"/>
                 <TextBox Text="{Binding Path=Message.Text}" Margin="5" Width="800"/>
                 <Button Content="Send" Width="50" Margin="5"
                         Command="{Binding Path=SendMessageCommand}"/>

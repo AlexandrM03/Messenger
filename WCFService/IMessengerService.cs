@@ -27,6 +27,10 @@ namespace WCFService
         List<Dictionary<string, string>> GetMessages(int chatId);
         [OperationContract(IsOneWay = true)]
         void SendMessage(string text, DateTime dateTime, int senderId, int chatId);
+        [OperationContract(IsOneWay = true)]
+        void SendImage(string path, DateTime dateTime, int senderId, int chatId);
+        [OperationContract]
+        void ChangeAvatar(int id, string path);
     }
 
     public interface IMessengerCallback
@@ -37,5 +41,7 @@ namespace WCFService
         void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId);
         [OperationContract(IsOneWay = true)]
         void AdminUpdate(int id, string name, string surname, string message);
+        [OperationContract(IsOneWay = true)]
+        void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId);
     }
 }

@@ -62,6 +62,18 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendMessage")]
         System.Threading.Tasks.Task SendMessageAsync(string text, System.DateTime dateTime, int senderId, int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendImage")]
+        void SendImage(string path, System.DateTime dateTime, int senderId, int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendImage")]
+        System.Threading.Tasks.Task SendImageAsync(string path, System.DateTime dateTime, int senderId, int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/ChangeAvatar", ReplyAction="http://tempuri.org/IMessengerService/ChangeAvatarResponse")]
+        void ChangeAvatar(int id, string path);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/ChangeAvatar", ReplyAction="http://tempuri.org/IMessengerService/ChangeAvatarResponse")]
+        System.Threading.Tasks.Task ChangeAvatarAsync(int id, string path);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -75,6 +87,9 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/AdminUpdate")]
         void AdminUpdate(int id, string name, string surname, string message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendImageCallback")]
+        void SendImageCallback(int id, string path, System.DateTime date, string name, string surname, string avatar, int chatId);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -167,6 +182,22 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task SendMessageAsync(string text, System.DateTime dateTime, int senderId, int chatId) {
             return base.Channel.SendMessageAsync(text, dateTime, senderId, chatId);
+        }
+        
+        public void SendImage(string path, System.DateTime dateTime, int senderId, int chatId) {
+            base.Channel.SendImage(path, dateTime, senderId, chatId);
+        }
+        
+        public System.Threading.Tasks.Task SendImageAsync(string path, System.DateTime dateTime, int senderId, int chatId) {
+            return base.Channel.SendImageAsync(path, dateTime, senderId, chatId);
+        }
+        
+        public void ChangeAvatar(int id, string path) {
+            base.Channel.ChangeAvatar(id, path);
+        }
+        
+        public System.Threading.Tasks.Task ChangeAvatarAsync(int id, string path) {
+            return base.Channel.ChangeAvatarAsync(id, path);
         }
     }
 }

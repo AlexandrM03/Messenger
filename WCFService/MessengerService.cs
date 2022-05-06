@@ -184,12 +184,20 @@ namespace WCFService
                 {
                     Dictionary<string, string> chatDict = new Dictionary<string, string>();
                     Chat chat = chats.Where(c => c.Id == chatUser.Chat.Id).FirstOrDefault();
+                    Message lastMessage = uow.MessageRepository.GetAll().Where(m => m.Chat == chat).OrderByDescending(m => m.Date).FirstOrDefault();
                     Media media = medias.Where(m => m.Id == chat.Media.Id).FirstOrDefault();
 
                     chatDict.Add("id", chat.Id.ToString());
                     chatDict.Add("name", chat.Name);
                     chatDict.Add("admin", chat.Admin.Id.ToString());
                     chatDict.Add("path", media.Path);
+                    if (lastMessage != null)
+                        if (lastMessage.Media != null)
+                            chatDict.Add("last_message", "Image");
+                        else
+                            chatDict.Add("last_message", lastMessage.Text);
+                    else
+                        chatDict.Add("last_message", "");
 
                     result.Add(chatDict);
                 }
@@ -217,8 +225,19 @@ namespace WCFService
                     messageDict.Add("name", user.Name);
                     messageDict.Add("surname", user.Surname);
                     messageDict.Add("path", media.Path);
-                    messageDict.Add("text", message.Text);
                     messageDict.Add("date", message.Date.ToString());
+
+                    if (message.Media != null)
+                    {
+                        Media image = medias.Where(m => m.Id == message.Media.Id).FirstOrDefault();
+                        messageDict.Add("type", "image");
+                        messageDict.Add("content", image.Path);
+                    }
+                    else
+                    {
+                        messageDict.Add("type", "text");
+                        messageDict.Add("content", message.Text);
+                    }
 
                     result.Add(messageDict);
                 }
@@ -233,8 +252,7 @@ namespace WCFService
                 User sender = uow.UserRepository.GetAll().Where(u => u.Id == senderId).FirstOrDefault();
                 Media media = uow.MediaRepository.GetAll().Where(m => m.Id == sender.Media.Id).FirstOrDefault();
                 Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chatId).FirstOrDefault();
-                string sqlFormattedDate = dateTime.ToString("yyyy-MM-dd HH:mm:ss");
-                Message message = new Message() { Text = text, Date = dateTime, User = sender, Chat = chat };
+                Message message = new Message() { Text = text, Date = dateTime, Media = null, User = sender, Chat = chat };
                 uow.MessageRepository.Add(message);
 
                 List<int> retrievers = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat).Select(cu => cu.User.Id).ToList();
@@ -250,6 +268,45 @@ namespace WCFService
 
                 uow.Save();
             }
+        }
+
+        public void SendImage(string path, DateTime dateTime, int senderId, int chatId)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                User sender = uow.UserRepository.GetAll().Where(u => u.Id == senderId).FirstOrDefault();
+                Media media = uow.MediaRepository.GetAll().Where(m => m.Id == sender.Media.Id).FirstOrDefault();
+                Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chatId).FirstOrDefault();
+                Media image = new Media() { Path = path };
+                uow.MediaRepository.Add(image);
+                Message message = new Message() { Text = null, Date = dateTime, Media = image, User = sender, Chat = chat };
+                uow.MessageRepository.Add(message);
+
+                List<int> retrievers = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat).Select(cu => cu.User.Id).ToList();
+                foreach (int userId in retrievers)
+                {
+                    ServerUser connectedUser = connectedUsers.Where(u => u.Id == userId).FirstOrDefault();
+                    if (connectedUser != null)
+                    {
+                        connectedUser.OperationContext.GetCallbackChannel<IMessengerCallback>()
+                            .SendMessageCallback(message.Id, message.Text, message.Date, sender.Name, sender.Surname, media.Path, chatId);
+                    }
+                }
+
+                uow.Save();
+            }
+        }
+
+        public void ChangeAvatar(int id, string path)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                User user = uow.UserRepository.GetAll().Where(u => u.Id == id).FirstOrDefault();
+                Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
+                media.Path = path;
+                uow.MediaRepository.Update(media);
+                uow.Save();
+            }  
         }
     }
 }

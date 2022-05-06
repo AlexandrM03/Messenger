@@ -78,6 +78,15 @@
   <wsdl:message name="IMessengerService_SendMessage_InputMessage">
     <wsdl:part name="parameters" element="tns:SendMessage" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_SendImage_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendImage" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_ChangeAvatar_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeAvatar" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_ChangeAvatar_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeAvatarResponse" />
+  </wsdl:message>
   <wsdl:message name="IMessengerService_CreateChatCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CreateChatCallback" />
   </wsdl:message>
@@ -86,6 +95,9 @@
   </wsdl:message>
   <wsdl:message name="IMessengerService_AdminUpdate_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:AdminUpdate" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_SendImageCallback_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:SendImageCallback" />
   </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Registration">
@@ -118,6 +130,13 @@
     <wsdl:operation name="SendMessage">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/SendMessage" message="tns:IMessengerService_SendMessage_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="SendImage">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/SendImage" message="tns:IMessengerService_SendImage_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAvatar">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/ChangeAvatar" message="tns:IMessengerService_ChangeAvatar_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/ChangeAvatarResponse" message="tns:IMessengerService_ChangeAvatar_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatCallback" message="tns:IMessengerService_CreateChatCallback_OutputCallbackMessage" />
     </wsdl:operation>
@@ -126,6 +145,9 @@
     </wsdl:operation>
     <wsdl:operation name="AdminUpdate">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/AdminUpdate" message="tns:IMessengerService_AdminUpdate_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendImageCallback">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/SendImageCallback" message="tns:IMessengerService_SendImageCallback_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -197,6 +219,21 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="SendImage">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/SendImage" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeAvatar">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/ChangeAvatar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/CreateChatCallback" style="document" />
       <wsdl:output>
@@ -211,6 +248,12 @@
     </wsdl:operation>
     <wsdl:operation name="AdminUpdate">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/AdminUpdate" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendImageCallback">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/SendImageCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

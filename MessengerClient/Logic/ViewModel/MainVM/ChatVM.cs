@@ -1,4 +1,5 @@
 ﻿using MessengerClient.Logic.Model;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,6 +47,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         }
 
         public ICommand SendMessageCommand { get; set; }
+        public ICommand SendImageCommand { get; set; }
 
         public ChatVM()
         {
@@ -54,6 +56,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             Message = new MessageModel();
 
             SendMessageCommand = new DelegateCommand(SendMessage);
+            SendImageCommand = new DelegateCommand(SendImage);
 
             CurrentClient.SetChatVM(this);
         }
@@ -62,6 +65,18 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         {
             Task.Factory.StartNew(() => CurrentClient.Client.SendMessage(Message.Text, DateTime.Now, CurrentUser.User.Id, Chat.Id));
             //CurrentClient.Client.SendMessage(Message.Text, DateTime.Now, CurrentUser.User.Id, Chat.Id);
+        }
+
+        private void SendImage(object obj)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                Message.Path = openFileDialog.FileName;
+            }
+            Task.Factory.StartNew(() => CurrentClient.Client.SendImage(Message.Path, DateTime.Now, CurrentUser.User.Id, Chat.Id));
         }
     }
 }

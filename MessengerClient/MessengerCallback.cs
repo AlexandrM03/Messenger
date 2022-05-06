@@ -38,6 +38,24 @@ namespace MessengerClient
             });
         }
 
+        public void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId)
+        {
+            if (CurrentChat.Chat.Id == chatId)
+            {
+                ChatVM.Messages.Add(new MessageModel()
+                {
+                    Id = id,
+                    Path = path,
+                    Date = date.ToString(),
+                    Name = name,
+                    Surname = surname,
+                    Avatar = avatar
+                });
+            }
+
+            MainVM.Chats.First(x => x.Id == chatId).LastMessage = "Image";
+        }
+
         public void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId)
         {
             if (CurrentChat.Chat.Id == chatId)
@@ -52,6 +70,8 @@ namespace MessengerClient
                     Avatar = avatar
                 });
             }
+
+            MainVM.Chats.First(x => x.Id == chatId).LastMessage = text;
         }
-    }
+    }        
 }

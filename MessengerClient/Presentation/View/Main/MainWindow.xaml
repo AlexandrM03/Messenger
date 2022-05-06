@@ -65,6 +65,9 @@
                     <Button Background="Transparent" Width="50" Command="{Binding Path=GoToSearch}">
                         <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\search_icon.png"/>
                     </Button>
+                    <Button Background="Transparent" Width="50" Command="{Binding Path=GoToAccount}">
+                        <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\info_icon.png"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>

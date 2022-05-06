@@ -63,7 +63,8 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                     Id = Int32.Parse(chat["id"]),
                     Name = chat["name"],
                     Admin = Int32.Parse(chat["admin"]),
-                    Image = chat["path"]
+                    Image = chat["path"],
+                    LastMessage = chat["last_message"],
                 });
             }
         }
@@ -90,15 +91,21 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             ObservableCollection<MessageModel> messages = new ObservableCollection<MessageModel>();
             foreach (Dictionary<string, string> message in messagesDictionary)
             {
-                messages.Add(new MessageModel()
+                MessageModel messageModel = new MessageModel()
                 {
                     Id = Int32.Parse(message["id"]),
                     Name = message["name"],
                     Surname = message["surname"],
                     Avatar = message["path"],
-                    Text = message["text"],
                     Date = message["date"]
-                });
+                };
+
+                if (message["type"] == "image")
+                    messageModel.Path = message["content"];
+                else
+                    messageModel.Text = message["content"];
+
+                messages.Add(messageModel);
             }
             CurrentClient.Callback.ChatVM.Messages = messages;
             MainContent = navigation.GetPage("chat");

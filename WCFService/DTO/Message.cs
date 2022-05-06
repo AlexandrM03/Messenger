@@ -13,6 +13,7 @@ namespace WCFService.DTO
         public int Id { get; set; }
         public string Text { get; set; }
         public DateTime Date { get; set; }
+        public Media Media { get; set; }
         public User User { get; set; }
         public Chat Chat { get; set; }
     }
