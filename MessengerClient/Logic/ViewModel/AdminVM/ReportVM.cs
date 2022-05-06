@@ -25,6 +25,8 @@ namespace MessengerClient.Logic.ViewModel.AdminVM
         public ReportVM()
         {
             Reports = new ObservableCollection<ReportModel>();
+
+            CurrentClient.SetReportVM(this);
         }
     }
 }

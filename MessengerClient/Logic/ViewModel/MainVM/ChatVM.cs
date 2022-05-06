@@ -48,6 +48,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
         public ICommand SendMessageCommand { get; set; }
         public ICommand SendImageCommand { get; set; }
+        public ICommand SendReportCommand { get; set; }
 
         public ChatVM()
         {
@@ -57,6 +58,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
             SendMessageCommand = new DelegateCommand(SendMessage);
             SendImageCommand = new DelegateCommand(SendImage);
+            SendReportCommand = new DelegateCommand(SendReport);
 
             CurrentClient.SetChatVM(this);
         }
@@ -79,6 +81,14 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                 Message.Path = openFileDialog.FileName;
             }
             Task.Factory.StartNew(() => CurrentClient.Client.SendImage(Message.Path, DateTime.Now, CurrentUser.User.Id, Chat.Id));
+        }
+
+        private void SendReport(object obj)
+        {
+            if (!(obj is MessageModel message))
+                return;
+
+            Task.Factory.StartNew(() => CurrentClient.Client.ReportMessage(message.Id));
         }
     }
 }

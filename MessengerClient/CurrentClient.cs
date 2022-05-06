@@ -29,5 +29,10 @@ namespace MessengerClient
         {
             Callback.OnlineUsersVM = onlineUsersVM;
         }
+
+        public static void SetReportVM(ReportVM reportVM)
+        {
+            Callback.ReportVM = reportVM;
+        }
     }
 }

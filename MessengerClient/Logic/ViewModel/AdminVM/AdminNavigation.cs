@@ -13,12 +13,15 @@ namespace MessengerClient.Logic.ViewModel.AdminVM
         Dictionary<string, Page> pages = new Dictionary<string, Page>();
 
         private readonly Page online;
+        private readonly Page reports;
 
         public AdminNavigation()
         {
             online = new OnlineUsersPage();
+            reports = new ReportsPage();
 
             pages.Add("online", online);
+            pages.Add("reports", reports);
         }
 
         public Page GetPage(string name)

@@ -289,7 +289,7 @@ namespace WCFService
                     if (connectedUser != null)
                     {
                         connectedUser.OperationContext.GetCallbackChannel<IMessengerCallback>()
-                            .SendMessageCallback(message.Id, message.Text, message.Date, sender.Name, sender.Surname, media.Path, chatId);
+                            .SendImageCallback(message.Id, path, message.Date, sender.Name, sender.Surname, media.Path, chatId);
                     }
                 }
 
@@ -307,6 +307,85 @@ namespace WCFService
                 uow.MediaRepository.Update(media);
                 uow.Save();
             }  
+        }
+
+        public void ReportMessage(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Message message = uow.MessageRepository.GetAll().Where(m => m.Id == id).FirstOrDefault();
+                User user = uow.UserRepository.GetAll().Where(u => u.Id == message.User.Id).FirstOrDefault();
+                Report report = new Report() { Message = message };
+                uow.ReportRepository.Add(report);
+
+                Dictionary<string, string> content = new Dictionary<string, string>();
+                if (message.Text == null)
+                {
+                    Media media = uow.MediaRepository.GetAll().Where(m => m.Id == message.Media.Id).FirstOrDefault();
+                    content.Add("type", "image");
+                    content.Add("content", media.Path);
+                }
+                else
+                {
+                    content.Add("type", "text");
+                    content.Add("content", message.Text);
+                }
+
+                foreach (var userAdmin in connectedAdmins)
+                {
+                    userAdmin.OperationContext.GetCallbackChannel<IMessengerCallback>().ReportCallback(report.Id, user.Name, user.Surname, content);
+                }
+
+                uow.Save();
+            }
+        }
+
+        public void AcceptReport(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Report report = uow.ReportRepository.GetAll().Where(r => r.Id == id).FirstOrDefault();
+                Message message = uow.MessageRepository.GetAll().Where(m => m.Id == report.Message.Id).FirstOrDefault();
+                message.Media = null;
+                message.Text = "This message was hidden by admin";
+                uow.MessageRepository.Update(message);
+                uow.ReportRepository.Remove(report.Id);
+                uow.Save();
+            }
+        }
+
+        public List<Dictionary<string, string>> GetReports()
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                List<Report> reports = uow.ReportRepository.GetAll();
+                List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+                foreach (Report report in reports)
+                {
+                    Dictionary<string, string> reportDict = new Dictionary<string, string>();
+                    Message message = uow.MessageRepository.GetAll().Where(m => m.Id == report.Message.Id).FirstOrDefault();
+                    User user = uow.UserRepository.GetAll().Where(u => u.Id == message.User.Id).FirstOrDefault();
+
+                    reportDict.Add("id", report.Id.ToString());
+                    reportDict.Add("name", user.Name);
+                    reportDict.Add("surname", user.Surname);
+                    if (message.Text == null)
+                    {
+                        Media media = uow.MediaRepository.GetAll().Where(m => m.Id == message.Media.Id).FirstOrDefault();
+                        reportDict.Add("type", "image");
+                        reportDict.Add("content", media.Path);
+                    }
+                    else
+                    {
+                        reportDict.Add("type", "text");
+                        reportDict.Add("content", message.Text);
+                    }
+
+                    result.Add(reportDict);
+                }
+
+                return result;
+            }
         }
     }
 }

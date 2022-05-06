@@ -33,7 +33,14 @@
             </Frame>
 
             <Grid Grid.Column="1" Background="{DynamicResource NavigationBrush}">
-                
+                <StackPanel Orientation="Vertical" Margin="10">
+                    <Button Background="Transparent" Width="50" Command="{Binding Path=GoToOnlineUsersCommand}" BorderBrush="{x:Null}">
+                        <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\online_icon.png"/>
+                    </Button>
+                    <Button Background="Transparent" Width="50" Command="{Binding Path=GoToReportsCommand}" BorderBrush="{x:Null}">
+                        <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\report_icon.png"/>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>

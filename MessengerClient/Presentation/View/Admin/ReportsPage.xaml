@@ -25,6 +25,7 @@
                                 <TextBlock Text="{Binding Path=Message.Surname}"/>
                                 <TextBlock Text=": "/>
                                 <TextBlock Text="{Binding Path=Message.Text}"/>
+                                <Image Source="{Binding Path=Message.Path}" MaxHeight="100"/>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

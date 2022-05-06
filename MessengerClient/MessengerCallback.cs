@@ -15,6 +15,7 @@ namespace MessengerClient
         public MainVM MainVM { get; set; }
         public ChatVM ChatVM { get; set; }
         public OnlineUsersVM OnlineUsersVM { get; set; }
+        public ReportVM ReportVM { get; set; }
 
         public void AdminUpdate(int id, string name, string surname, string message)
         {
@@ -36,6 +37,25 @@ namespace MessengerClient
                 Admin = admin,
                 Image = path
             });
+        }
+
+        public void ReportCallback(int id, string name, string surname, Dictionary<string, string> message)
+        {
+            ReportModel report = new ReportModel()
+            {
+                Id = id,
+                Message = new MessageModel()
+                {
+                    Name = name,
+                    Surname = surname
+                }
+            };
+            if (message["type"] == "image")
+                report.Message.Path = message["content"];
+            else
+                report.Message.Text = message["content"];
+
+            ReportVM.Reports.Add(report);
         }
 
         public void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId)

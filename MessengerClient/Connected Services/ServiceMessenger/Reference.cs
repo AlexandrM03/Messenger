@@ -74,6 +74,24 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/ChangeAvatar", ReplyAction="http://tempuri.org/IMessengerService/ChangeAvatarResponse")]
         System.Threading.Tasks.Task ChangeAvatarAsync(int id, string path);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/ReportMessage")]
+        void ReportMessage(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/ReportMessage")]
+        System.Threading.Tasks.Task ReportMessageAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/AcceptReport", ReplyAction="http://tempuri.org/IMessengerService/AcceptReportResponse")]
+        void AcceptReport(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/AcceptReport", ReplyAction="http://tempuri.org/IMessengerService/AcceptReportResponse")]
+        System.Threading.Tasks.Task AcceptReportAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetReports", ReplyAction="http://tempuri.org/IMessengerService/GetReportsResponse")]
+        System.Collections.Generic.Dictionary<string, string>[] GetReports();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetReports", ReplyAction="http://tempuri.org/IMessengerService/GetReportsResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetReportsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -90,6 +108,9 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendImageCallback")]
         void SendImageCallback(int id, string path, System.DateTime date, string name, string surname, string avatar, int chatId);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/ReportCallback")]
+        void ReportCallback(int id, string name, string surname, System.Collections.Generic.Dictionary<string, string> message);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -198,6 +219,30 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task ChangeAvatarAsync(int id, string path) {
             return base.Channel.ChangeAvatarAsync(id, path);
+        }
+        
+        public void ReportMessage(int id) {
+            base.Channel.ReportMessage(id);
+        }
+        
+        public System.Threading.Tasks.Task ReportMessageAsync(int id) {
+            return base.Channel.ReportMessageAsync(id);
+        }
+        
+        public void AcceptReport(int id) {
+            base.Channel.AcceptReport(id);
+        }
+        
+        public System.Threading.Tasks.Task AcceptReportAsync(int id) {
+            return base.Channel.AcceptReportAsync(id);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string>[] GetReports() {
+            return base.Channel.GetReports();
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetReportsAsync() {
+            return base.Channel.GetReportsAsync();
         }
     }
 }

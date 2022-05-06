@@ -46,6 +46,11 @@
                                         <TextBlock Text="{Binding Path=Text}"/>
                                         <Image Source="{Binding Path=Path}" MaxHeight="100"/>
                                     </StackPanel>
+                                    <Button Height="30" Width="30" BorderBrush="{x:Null}" Background="{DynamicResource ChatBrush}"
+                                            Command="{Binding ElementName=myItems, Path=DataContext.SendReportCommand}"
+                                            CommandParameter="{Binding}">
+                                        <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\report_icon.png"/>
+                                    </Button>
                                 </StackPanel>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
