@@ -30,7 +30,6 @@
             <Frame Grid.Column="0"
                    Content="{Binding Path=MainContent}"
                    NavigationUIVisibility="Hidden">
-                
             </Frame>
 
             <Grid Grid.Column="1" Background="{DynamicResource NavigationBrush}">

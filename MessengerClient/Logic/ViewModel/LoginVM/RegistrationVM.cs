@@ -58,6 +58,7 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
             if (openFileDialog.ShowDialog() == true)
             {
                 RegistrationModel.Path = openFileDialog.FileName;
+                OnPropertyChanged("RegistrationModel");
             }
         }
 

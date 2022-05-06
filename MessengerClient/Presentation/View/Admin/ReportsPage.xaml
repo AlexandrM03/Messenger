@@ -1,0 +1,35 @@
+﻿<Page x:Class="MessengerClient.Presentation.View.Admin.ReportsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MessengerClient.Presentation.View.Admin"
+      xmlns:vm="clr-namespace:MessengerClient.Logic.ViewModel.AdminVM"
+      mc:Ignorable="d" 
+      d:DesignHeight="720" d:DesignWidth="1180"
+      Title="ReportsPage">
+    <Page.DataContext>
+        <vm:ReportVM/>
+    </Page.DataContext>
+    <Grid Background="{DynamicResource ChatsBackgroundBrush}">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="25">
+            <StackPanel x:Name="report_info">
+                <ItemsControl ItemsSource="{Binding Path=Reports}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                                <TextBlock Text="{Binding Path=Id}"/>
+                                <TextBlock Text="|"/>
+                                <TextBlock Text="{Binding Path=Message.Name}"/>
+                                <TextBlock Text=" "/>
+                                <TextBlock Text="{Binding Path=Message.Surname}"/>
+                                <TextBlock Text=": "/>
+                                <TextBlock Text="{Binding Path=Message.Text}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

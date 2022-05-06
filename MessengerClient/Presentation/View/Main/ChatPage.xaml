@@ -57,7 +57,11 @@
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Image" Width="50" Margin="5" Command="{Binding Path=SendImageCommand}"/>
-                <TextBox Text="{Binding Path=Message.Text}" Margin="5" Width="800"/>
+                <TextBox Text="{Binding Path=Message.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="800">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Return" Command="{Binding Path=SendMessageCommand}"/>
+                    </TextBox.InputBindings>
+                </TextBox>
                 <Button Content="Send" Width="50" Margin="5"
                         Command="{Binding Path=SendMessageCommand}"/>
             </StackPanel>
