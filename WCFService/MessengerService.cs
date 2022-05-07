@@ -147,7 +147,8 @@ namespace WCFService
 
                 ChatUser adminOfChat = new ChatUser() { Chat = chat, User = adminUser };
                 uow.ChatUserRepository.Add(adminOfChat);
-
+                uow.Save();
+                
                 foreach (int userId in users)
                 {
                     User user = allUsers.Where(u => u.Id == userId).FirstOrDefault();
@@ -227,7 +228,7 @@ namespace WCFService
                     messageDict.Add("path", media.Path);
                     messageDict.Add("date", message.Date.ToString());
 
-                    if (message.Media != null)
+                    if (message.Text == null)
                     {
                         Media image = medias.Where(m => m.Id == message.Media.Id).FirstOrDefault();
                         messageDict.Add("type", "image");
@@ -330,13 +331,13 @@ namespace WCFService
                     content.Add("type", "text");
                     content.Add("content", message.Text);
                 }
+                uow.Save();
 
                 foreach (var userAdmin in connectedAdmins)
                 {
                     userAdmin.OperationContext.GetCallbackChannel<IMessengerCallback>().ReportCallback(report.Id, user.Name, user.Surname, content);
                 }
 
-                uow.Save();
             }
         }
 
@@ -346,6 +347,7 @@ namespace WCFService
             {
                 Report report = uow.ReportRepository.GetAll().Where(r => r.Id == id).FirstOrDefault();
                 Message message = uow.MessageRepository.GetAll().Where(m => m.Id == report.Message.Id).FirstOrDefault();
+                // Ne rabotaet
                 message.Media = null;
                 message.Text = "This message was hidden by admin";
                 uow.MessageRepository.Update(message);
@@ -385,6 +387,16 @@ namespace WCFService
                 }
 
                 return result;
+            }
+        }
+
+        public void DeleteReport(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Report report = uow.ReportRepository.GetAll().Where(r => r.Id == id).FirstOrDefault();
+                uow.ReportRepository.Remove(report.Id);
+                uow.Save();
             }
         }
     }

@@ -102,6 +102,12 @@
   <wsdl:message name="IMessengerService_GetReports_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetReportsResponse" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_DeleteReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReport" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_DeleteReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteReportResponse" />
+  </wsdl:message>
   <wsdl:message name="IMessengerService_CreateChatCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CreateChatCallback" />
   </wsdl:message>
@@ -165,6 +171,10 @@
     <wsdl:operation name="GetReports">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetReports" message="tns:IMessengerService_GetReports_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetReportsResponse" message="tns:IMessengerService_GetReports_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/DeleteReport" message="tns:IMessengerService_DeleteReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/DeleteReportResponse" message="tns:IMessengerService_DeleteReport_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatCallback" message="tns:IMessengerService_CreateChatCallback_OutputCallbackMessage" />
@@ -283,6 +293,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetReports">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetReports" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteReport">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/DeleteReport" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

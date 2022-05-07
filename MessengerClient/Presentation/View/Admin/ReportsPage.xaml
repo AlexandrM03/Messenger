@@ -14,7 +14,7 @@
     <Grid Background="{DynamicResource ChatsBackgroundBrush}">
         <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="25">
             <StackPanel x:Name="report_info">
-                <ItemsControl ItemsSource="{Binding Path=Reports}">
+                <ItemsControl ItemsSource="{Binding Path=Reports}" x:Name="myItems">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
@@ -26,6 +26,14 @@
                                 <TextBlock Text=": "/>
                                 <TextBlock Text="{Binding Path=Message.Text}"/>
                                 <Image Source="{Binding Path=Message.Path}" MaxHeight="100"/>
+                                <Button Background="Transparent" Width="50" Command="{Binding ElementName=myItems, Path=DataContext.AcceptReportCommand}" 
+                                        CommandParameter="{Binding}" BorderBrush="{x:Null}">
+                                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\accept_icon.png"/>
+                                </Button>
+                                <Button Background="Transparent" Width="50" Command="{Binding ElementName=myItems, Path=DataContext.DeclineReportCommand}" 
+                                        CommandParameter="{Binding}" BorderBrush="{x:Null}">
+                                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\decline_icon.png"/>
+                                </Button>
                             </StackPanel>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>

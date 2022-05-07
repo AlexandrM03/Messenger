@@ -92,6 +92,12 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetReports", ReplyAction="http://tempuri.org/IMessengerService/GetReportsResponse")]
         System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetReportsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/DeleteReport", ReplyAction="http://tempuri.org/IMessengerService/DeleteReportResponse")]
+        void DeleteReport(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/DeleteReport", ReplyAction="http://tempuri.org/IMessengerService/DeleteReportResponse")]
+        System.Threading.Tasks.Task DeleteReportAsync(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -243,6 +249,14 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetReportsAsync() {
             return base.Channel.GetReportsAsync();
+        }
+        
+        public void DeleteReport(int id) {
+            base.Channel.DeleteReport(id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteReportAsync(int id) {
+            return base.Channel.DeleteReportAsync(id);
         }
     }
 }

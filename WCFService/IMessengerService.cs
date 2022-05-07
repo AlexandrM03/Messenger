@@ -37,6 +37,8 @@ namespace WCFService
         void AcceptReport(int id);
         [OperationContract]
         List<Dictionary<string, string>> GetReports();
+        [OperationContract]
+        void DeleteReport(int id);
     }
 
     public interface IMessengerCallback
