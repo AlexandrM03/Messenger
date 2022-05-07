@@ -399,5 +399,46 @@ namespace WCFService
                 uow.Save();
             }
         }
+
+        public List<Dictionary<string, string>> GetChatMembers(int id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == id).FirstOrDefault();
+                List<ChatUser> chatUser = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat).ToList();
+                List<Dictionary<string, string>> result = new List<Dictionary<string, string>>();
+                foreach (ChatUser cu in chatUser)
+                {
+                    Dictionary<string, string> chatUserDict = new Dictionary<string, string>();
+                    User user = uow.UserRepository.GetAll().Where(u => u.Id == cu.User.Id).FirstOrDefault();
+                    Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
+                    chatUserDict.Add("id", user.Id.ToString());
+                    chatUserDict.Add("name", user.Name);
+                    chatUserDict.Add("surname", user.Surname);
+                    chatUserDict.Add("avatar", media.Path);
+                    result.Add(chatUserDict);
+                }
+
+                return result;
+            }
+        }
+
+        public void DeleteUserFromChat(int chat_id, int user_id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chat_id).FirstOrDefault();
+                User user = uow.UserRepository.GetAll().Where(u => u.Id == user_id).FirstOrDefault();
+                ChatUser chatUser = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat && cu.User == user).FirstOrDefault();
+                uow.ChatUserRepository.Remove(chatUser.Id);
+                uow.Save();
+
+                ServerUser removedUser = connectedUsers.Where(u => u.Id == user_id).FirstOrDefault();
+                if (removedUser != null)
+                {
+                    removedUser.OperationContext.GetCallbackChannel<IMessengerCallback>().DeleteFromChatCallback(chat_id);
+                }
+            }
+        }
     }
 }

@@ -14,15 +14,18 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
         private readonly Page account;
         private readonly Page search;
+        private readonly Page chatInfo;
 
         public MainNavigation()
         {
             account = new AccountPage();
             search = new SearchPage();
-            
+            chatInfo = new ChatInfoPage();
+
             pages.Add("account", account);
             pages.Add("search", search);
             pages.Add("chat", new ChatPage());
+            pages.Add("chatInfo", chatInfo);
         }
 
         public Page GetPage(string name)

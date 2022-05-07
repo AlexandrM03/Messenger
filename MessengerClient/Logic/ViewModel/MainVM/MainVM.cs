@@ -18,6 +18,11 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         private MainNavigation navigation;
         private ObservableCollection<ChatModel> chats;
 
+        public MainNavigation Navigation
+        {
+            get => navigation;
+        }
+
         public ObservableCollection<ChatModel> Chats
         {
             get => chats;

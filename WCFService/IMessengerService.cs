@@ -39,6 +39,10 @@ namespace WCFService
         List<Dictionary<string, string>> GetReports();
         [OperationContract]
         void DeleteReport(int id);
+        [OperationContract]
+        List<Dictionary<string, string>> GetChatMembers(int id);
+        [OperationContract(IsOneWay = true)]
+        void DeleteUserFromChat(int chat_id, int user_id);
     }
 
     public interface IMessengerCallback
@@ -53,5 +57,7 @@ namespace WCFService
         void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId);
         [OperationContract(IsOneWay = true)]
         void ReportCallback(int id, string name, string surname, Dictionary<string, string> message);
+        [OperationContract(IsOneWay = true)]
+        void DeleteFromChatCallback(int id);
     }
 }

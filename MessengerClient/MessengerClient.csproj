@@ -73,6 +73,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Presentation\View\Main\ChatInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation\View\Main\ChatPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,6 +116,7 @@
     <Compile Include="Logic\ViewModel\LoginVM\SignUpNavigation.cs" />
     <Compile Include="Logic\ViewModel\LoginVM\SignVM.cs" />
     <Compile Include="Logic\ViewModel\MainVM\AccountVM.cs" />
+    <Compile Include="Logic\ViewModel\MainVM\ChatInfoVM.cs" />
     <Compile Include="Logic\ViewModel\MainVM\ChatVM.cs" />
     <Compile Include="Logic\ViewModel\MainVM\MainNavigation.cs" />
     <Compile Include="Logic\ViewModel\MainVM\MainVM.cs" />
@@ -128,6 +133,9 @@
     </Compile>
     <Compile Include="Presentation\View\Main\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Presentation\View\Main\ChatInfoPage.xaml.cs">
+      <DependentUpon>ChatInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Presentation\View\Main\ChatPage.xaml.cs">
       <DependentUpon>ChatPage.xaml</DependentUpon>

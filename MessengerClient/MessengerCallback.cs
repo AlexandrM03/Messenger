@@ -1,6 +1,7 @@
 ﻿using MessengerClient.Logic.Model;
 using MessengerClient.Logic.ViewModel.AdminVM;
 using MessengerClient.Logic.ViewModel.MainVM;
+using MessengerClient.Presentation.View.Main;
 using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace MessengerClient
         public ChatVM ChatVM { get; set; }
         public OnlineUsersVM OnlineUsersVM { get; set; }
         public ReportVM ReportVM { get; set; }
+        public ChatInfoVM ChatInfoVM { get; set; }
 
         public void AdminUpdate(int id, string name, string surname, string message)
         {
@@ -37,6 +39,15 @@ namespace MessengerClient
                 Admin = admin,
                 Image = path
             });
+        }
+
+        public void DeleteFromChatCallback(int id)
+        {
+            MainVM.Chats.Remove(MainVM.Chats.First(x => x.Id == id));
+            if ((MainVM.MainContent is ChatPage) && CurrentChat.Chat.Id == id)
+            {
+                MainVM.MainContent = MainVM.Navigation.GetPage("account");
+            }
         }
 
         public void ReportCallback(int id, string name, string surname, Dictionary<string, string> message)

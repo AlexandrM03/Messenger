@@ -108,6 +108,15 @@
   <wsdl:message name="IMessengerService_DeleteReport_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeleteReportResponse" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_GetChatMembers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChatMembers" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_GetChatMembers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChatMembersResponse" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_DeleteUserFromChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteUserFromChat" />
+  </wsdl:message>
   <wsdl:message name="IMessengerService_CreateChatCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CreateChatCallback" />
   </wsdl:message>
@@ -122,6 +131,9 @@
   </wsdl:message>
   <wsdl:message name="IMessengerService_ReportCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:ReportCallback" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_DeleteFromChatCallback_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:DeleteFromChatCallback" />
   </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Registration">
@@ -176,6 +188,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/DeleteReport" message="tns:IMessengerService_DeleteReport_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/DeleteReportResponse" message="tns:IMessengerService_DeleteReport_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetChatMembers">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/GetChatMembers" message="tns:IMessengerService_GetChatMembers_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/GetChatMembersResponse" message="tns:IMessengerService_GetChatMembers_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/DeleteUserFromChat" message="tns:IMessengerService_DeleteUserFromChat_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatCallback" message="tns:IMessengerService_CreateChatCallback_OutputCallbackMessage" />
     </wsdl:operation>
@@ -190,6 +209,9 @@
     </wsdl:operation>
     <wsdl:operation name="ReportCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/ReportCallback" message="tns:IMessengerService_ReportCallback_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromChatCallback">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/DeleteFromChatCallback" message="tns:IMessengerService_DeleteFromChatCallback_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -309,6 +331,21 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetChatMembers">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/GetChatMembers" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteUserFromChat">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/DeleteUserFromChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/CreateChatCallback" style="document" />
       <wsdl:output>
@@ -335,6 +372,12 @@
     </wsdl:operation>
     <wsdl:operation name="ReportCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/ReportCallback" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteFromChatCallback">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/DeleteFromChatCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

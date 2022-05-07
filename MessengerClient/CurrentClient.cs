@@ -34,5 +34,10 @@ namespace MessengerClient
         {
             Callback.ReportVM = reportVM;
         }
+
+        public static void SetChatInfoVM(ChatInfoVM chatInfoVM)
+        {
+            Callback.ChatInfoVM = chatInfoVM;
+        }
     }
 }

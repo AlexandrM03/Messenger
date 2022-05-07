@@ -19,7 +19,11 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock Text="{Binding Path=Chat.Name}" Foreground="{DynamicResource HighPanelTextBrush}" Margin="5"/>
+            <TextBlock Text="{Binding Path=Chat.Name}" Foreground="{DynamicResource HighPanelTextBrush}" Margin="5">
+                <TextBlock.InputBindings>
+                    <MouseBinding Command="{Binding Path=GoToChatInfoCommand}" MouseAction="LeftClick" />
+                </TextBlock.InputBindings>
+            </TextBlock>
         </Grid>
 
         <Grid Grid.Row="1">

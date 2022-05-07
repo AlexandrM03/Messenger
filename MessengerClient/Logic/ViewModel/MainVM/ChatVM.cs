@@ -49,6 +49,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         public ICommand SendMessageCommand { get; set; }
         public ICommand SendImageCommand { get; set; }
         public ICommand SendReportCommand { get; set; }
+        public ICommand GoToChatInfoCommand { get; set; }
 
         public ChatVM()
         {
@@ -59,6 +60,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             SendMessageCommand = new DelegateCommand(SendMessage);
             SendImageCommand = new DelegateCommand(SendImage);
             SendReportCommand = new DelegateCommand(SendReport);
+            GoToChatInfoCommand = new DelegateCommand(GoToChatInfo);
 
             CurrentClient.SetChatVM(this);
         }
@@ -89,6 +91,27 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                 return;
 
             Task.Factory.StartNew(() => CurrentClient.Client.ReportMessage(message.Id));
+        }
+
+        private void GoToChatInfo(object obj)
+        {
+            List<Dictionary<string, string>> dictionary = CurrentClient.Client.GetChatMembers(Chat.Id).ToList();
+            ObservableCollection<UserModel> userModels = new ObservableCollection<UserModel>();
+            foreach (Dictionary<string, string> user in dictionary)
+            {
+                UserModel userModel = new UserModel()
+                {
+                    Id = Int32.Parse(user["id"]),
+                    Name = user["name"],
+                    Surname = user["surname"],
+                    Avatar = user["avatar"]
+                };
+
+                userModels.Add(userModel);
+            }
+
+            CurrentClient.Callback.ChatInfoVM.Users = userModels;
+            CurrentClient.Callback.MainVM.MainContent = CurrentClient.Callback.MainVM.Navigation.GetPage("chatInfo");
         }
     }
 }

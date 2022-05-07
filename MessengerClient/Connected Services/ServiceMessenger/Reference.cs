@@ -98,6 +98,18 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/DeleteReport", ReplyAction="http://tempuri.org/IMessengerService/DeleteReportResponse")]
         System.Threading.Tasks.Task DeleteReportAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetChatMembers", ReplyAction="http://tempuri.org/IMessengerService/GetChatMembersResponse")]
+        System.Collections.Generic.Dictionary<string, string>[] GetChatMembers(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IMessengerService/GetChatMembers", ReplyAction="http://tempuri.org/IMessengerService/GetChatMembersResponse")]
+        System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetChatMembersAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/DeleteUserFromChat")]
+        void DeleteUserFromChat(int chat_id, int user_id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/DeleteUserFromChat")]
+        System.Threading.Tasks.Task DeleteUserFromChatAsync(int chat_id, int user_id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -117,6 +129,9 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/ReportCallback")]
         void ReportCallback(int id, string name, string surname, System.Collections.Generic.Dictionary<string, string> message);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/DeleteFromChatCallback")]
+        void DeleteFromChatCallback(int id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -257,6 +272,22 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task DeleteReportAsync(int id) {
             return base.Channel.DeleteReportAsync(id);
+        }
+        
+        public System.Collections.Generic.Dictionary<string, string>[] GetChatMembers(int id) {
+            return base.Channel.GetChatMembers(id);
+        }
+        
+        public System.Threading.Tasks.Task<System.Collections.Generic.Dictionary<string, string>[]> GetChatMembersAsync(int id) {
+            return base.Channel.GetChatMembersAsync(id);
+        }
+        
+        public void DeleteUserFromChat(int chat_id, int user_id) {
+            base.Channel.DeleteUserFromChat(chat_id, user_id);
+        }
+        
+        public System.Threading.Tasks.Task DeleteUserFromChatAsync(int chat_id, int user_id) {
+            return base.Channel.DeleteUserFromChatAsync(chat_id, user_id);
         }
     }
 }
