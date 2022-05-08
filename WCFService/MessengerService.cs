@@ -119,14 +119,17 @@ namespace WCFService
                 {
                     Dictionary<string, string> userDict = new Dictionary<string, string>();
                     Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
-                    
-                    userDict.Add("id", user.Id.ToString());
-                    userDict.Add("name", user.Name);
-                    userDict.Add("surname", user.Surname);
-                    userDict.Add("role", user.Role);
-                    userDict.Add("path", media.Path);
 
-                    result.Add(userDict);
+                    if (user.Role == "user")
+                    {
+                        userDict.Add("id", user.Id.ToString());
+                        userDict.Add("name", user.Name);
+                        userDict.Add("surname", user.Surname);
+                        userDict.Add("role", user.Role);
+                        userDict.Add("path", media.Path);
+
+                        result.Add(userDict);
+                    }
                 }
                 return result;
             }
@@ -347,7 +350,6 @@ namespace WCFService
             {
                 Report report = uow.ReportRepository.GetAll().Where(r => r.Id == id).FirstOrDefault();
                 Message message = uow.MessageRepository.GetAll().Where(m => m.Id == report.Message.Id).FirstOrDefault();
-                // Ne rabotaet
                 message.Media = null;
                 message.Text = "This message was hidden by admin";
                 uow.MessageRepository.Update(message);
@@ -437,6 +439,39 @@ namespace WCFService
                 if (removedUser != null)
                 {
                     removedUser.OperationContext.GetCallbackChannel<IMessengerCallback>().DeleteFromChatCallback(chat_id);
+                }
+            }
+        }
+
+        public void AddUserToChat(int chat_id, int user_id)
+        {
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chat_id).FirstOrDefault();
+                User user = uow.UserRepository.GetAll().Where(u => u.Id == user_id).FirstOrDefault();
+                User admin = uow.UserRepository.GetAll().Where(u => u.Id == chat.Admin.Id).FirstOrDefault();
+                Media media = uow.MediaRepository.GetAll().Where(m => m.Id == chat.Media.Id).FirstOrDefault();
+                Message lastMessage = uow.MessageRepository.GetAll().Where(m => m.Chat == chat).OrderByDescending(m => m.Date).FirstOrDefault();
+                string lastMessageText = "";
+                if (lastMessage != null)
+                {
+                    if (lastMessage.Text != null)
+                    {
+                        lastMessageText = lastMessage.Text;
+                    }
+                    else
+                    {
+                        lastMessageText = "Image";
+                    }
+                }
+                ChatUser chatUser = new ChatUser() { Chat = chat, User = user };
+                uow.ChatUserRepository.Add(chatUser);
+                uow.Save();
+
+                ServerUser addedUser = connectedUsers.Where(u => u.Id == user_id).FirstOrDefault();
+                if (addedUser != null)
+                {
+                    addedUser.OperationContext.GetCallbackChannel<IMessengerCallback>().AddToChatCallback(chat_id, chat.Name, admin.Id, media.Path, lastMessageText);
                 }
             }
         }

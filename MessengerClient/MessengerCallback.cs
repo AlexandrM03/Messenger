@@ -50,6 +50,18 @@ namespace MessengerClient
             }
         }
 
+        public void AddToChatCallback(int id, string name, int admin, string path, string lastMessage)
+        {
+            MainVM.Chats.Add(new ChatModel()
+            {
+                Id = id,
+                Name = name,
+                Admin = admin,
+                Image = path,
+                LastMessage = lastMessage
+            });
+        }
+
         public void ReportCallback(int id, string name, string surname, Dictionary<string, string> message)
         {
             ReportModel report = new ReportModel()

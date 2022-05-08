@@ -111,6 +111,24 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             }
 
             CurrentClient.Callback.ChatInfoVM.Users = userModels;
+
+            List<Dictionary<string, string>> secondDictionary = CurrentClient.Client.GetUsers().ToList();
+            ObservableCollection<UserModel> secondUserModels = new ObservableCollection<UserModel>();
+            foreach (Dictionary<string, string> user in secondDictionary)
+            {
+                UserModel userModel = new UserModel()
+                {
+                    Id = Int32.Parse(user["id"]),
+                    Name = user["name"],
+                    Surname = user["surname"],
+                    Avatar = user["path"]
+                };
+
+                secondUserModels.Add(userModel);
+            }
+
+            secondUserModels = new ObservableCollection<UserModel>(secondUserModels.Where(x => !userModels.Any(y => y.Id == x.Id)));
+            CurrentClient.Callback.ChatInfoVM.OtherUsers = secondUserModels;
             CurrentClient.Callback.MainVM.MainContent = CurrentClient.Callback.MainVM.Navigation.GetPage("chatInfo");
         }
     }

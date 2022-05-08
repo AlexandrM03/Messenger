@@ -35,6 +35,30 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+
+                <TextBlock Text="123"/>
+
+                <ItemsControl ItemsSource="{Binding Path=OtherUsers}" x:Name="myItems2">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}" Margin="3">
+                                <Image Source="{Binding Path=Avatar}" Width="30" Height="30" VerticalAlignment="Top"/>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding Path=Surname}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                                <Button Height="30" Width="30" BorderBrush="{x:Null}" Background="{DynamicResource ChatBrush}"
+                                        Command="{Binding ElementName=myItems2, Path=DataContext.AddUserCommand}"
+                                        CommandParameter="{Binding}">
+                                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\add_icon.png"/>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </ScrollViewer>
     </Grid>

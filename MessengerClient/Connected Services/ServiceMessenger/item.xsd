@@ -194,6 +194,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="AddUserToChat">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="chat_id" type="xs:int" />
+        <xs:element minOccurs="0" name="user_id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CreateChatCallback">
     <xs:complexType>
       <xs:sequence>
@@ -254,6 +262,17 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddToChatCallback">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+        <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="admin" type="xs:int" />
+        <xs:element minOccurs="0" name="path" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="lastMessage" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

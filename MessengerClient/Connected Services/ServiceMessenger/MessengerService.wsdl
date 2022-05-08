@@ -117,6 +117,9 @@
   <wsdl:message name="IMessengerService_DeleteUserFromChat_InputMessage">
     <wsdl:part name="parameters" element="tns:DeleteUserFromChat" />
   </wsdl:message>
+  <wsdl:message name="IMessengerService_AddUserToChat_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddUserToChat" />
+  </wsdl:message>
   <wsdl:message name="IMessengerService_CreateChatCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:CreateChatCallback" />
   </wsdl:message>
@@ -134,6 +137,9 @@
   </wsdl:message>
   <wsdl:message name="IMessengerService_DeleteFromChatCallback_OutputCallbackMessage">
     <wsdl:part name="parameters" element="tns:DeleteFromChatCallback" />
+  </wsdl:message>
+  <wsdl:message name="IMessengerService_AddToChatCallback_OutputCallbackMessage">
+    <wsdl:part name="parameters" element="tns:AddToChatCallback" />
   </wsdl:message>
   <wsdl:portType name="IMessengerService">
     <wsdl:operation name="Registration">
@@ -195,6 +201,9 @@
     <wsdl:operation name="DeleteUserFromChat">
       <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/DeleteUserFromChat" message="tns:IMessengerService_DeleteUserFromChat_InputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="AddUserToChat">
+      <wsdl:input wsaw:Action="http://tempuri.org/IMessengerService/AddUserToChat" message="tns:IMessengerService_AddUserToChat_InputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/CreateChatCallback" message="tns:IMessengerService_CreateChatCallback_OutputCallbackMessage" />
     </wsdl:operation>
@@ -212,6 +221,9 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteFromChatCallback">
       <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/DeleteFromChatCallback" message="tns:IMessengerService_DeleteFromChatCallback_OutputCallbackMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddToChatCallback">
+      <wsdl:output wsaw:Action="http://tempuri.org/IMessengerService/AddToChatCallback" message="tns:IMessengerService_AddToChatCallback_OutputCallbackMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_IMessengerService" type="tns:IMessengerService">
@@ -346,6 +358,12 @@
         <soap12:body use="literal" />
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="AddUserToChat">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/AddUserToChat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
     <wsdl:operation name="CreateChatCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/CreateChatCallback" style="document" />
       <wsdl:output>
@@ -378,6 +396,12 @@
     </wsdl:operation>
     <wsdl:operation name="DeleteFromChatCallback">
       <soap12:operation soapAction="http://tempuri.org/IMessengerService/DeleteFromChatCallback" style="document" />
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddToChatCallback">
+      <soap12:operation soapAction="http://tempuri.org/IMessengerService/AddToChatCallback" style="document" />
       <wsdl:output>
         <soap12:body use="literal" />
       </wsdl:output>

@@ -110,6 +110,12 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/DeleteUserFromChat")]
         System.Threading.Tasks.Task DeleteUserFromChatAsync(int chat_id, int user_id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/AddUserToChat")]
+        void AddUserToChat(int chat_id, int user_id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/AddUserToChat")]
+        System.Threading.Tasks.Task AddUserToChatAsync(int chat_id, int user_id);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -132,6 +138,9 @@ namespace MessengerClient.ServiceMessenger {
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/DeleteFromChatCallback")]
         void DeleteFromChatCallback(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/AddToChatCallback")]
+        void AddToChatCallback(int id, string name, int admin, string path, string lastMessage);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -288,6 +297,14 @@ namespace MessengerClient.ServiceMessenger {
         
         public System.Threading.Tasks.Task DeleteUserFromChatAsync(int chat_id, int user_id) {
             return base.Channel.DeleteUserFromChatAsync(chat_id, user_id);
+        }
+        
+        public void AddUserToChat(int chat_id, int user_id) {
+            base.Channel.AddUserToChat(chat_id, user_id);
+        }
+        
+        public System.Threading.Tasks.Task AddUserToChatAsync(int chat_id, int user_id) {
+            return base.Channel.AddUserToChatAsync(chat_id, user_id);
         }
     }
 }

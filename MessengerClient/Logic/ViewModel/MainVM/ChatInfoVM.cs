@@ -12,6 +12,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
     public class ChatInfoVM : BaseVM
     {
         private ObservableCollection<UserModel> users;
+        private ObservableCollection<UserModel> otherUsers;
 
         public ObservableCollection<UserModel> Users
         {
@@ -23,14 +24,26 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             }
         }
 
+        public ObservableCollection<UserModel> OtherUsers
+        {
+            get => otherUsers;
+            set
+            {
+                otherUsers = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand RemoveUserCommand { get; set; }
+        public ICommand AddUserCommand { get; set; }
 
         public ChatInfoVM()
         {
             Users = new ObservableCollection<UserModel>();
 
-            RemoveUserCommand = new DelegateCommand(RemoveUser, CanRemove);
-            
+            RemoveUserCommand = new DelegateCommand(RemoveUser, CanExecute);
+            AddUserCommand = new DelegateCommand(AddUser, CanExecute);
+
             CurrentClient.SetChatInfoVM(this);
         }
 
@@ -41,9 +54,20 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
             CurrentClient.Client.DeleteUserFromChat(CurrentChat.Chat.Id, user.Id);
             Users.Remove(user);
+            OtherUsers.Add(user);
         }
 
-        private bool CanRemove(object obj)
+        private void AddUser(object obj)
+        {
+            if (!(obj is UserModel user))
+                return;
+
+            CurrentClient.Client.AddUserToChat(CurrentChat.Chat.Id, user.Id);
+            Users.Add(user);
+            OtherUsers.Remove(user);
+        }
+
+        private bool CanExecute(object obj)
         {
             return CurrentUser.User.Id == CurrentChat.Chat.Admin;
         }
