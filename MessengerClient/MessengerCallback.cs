@@ -5,6 +5,7 @@ using MessengerClient.Presentation.View.Main;
 using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,7 +97,10 @@ namespace MessengerClient
                 });
             }
 
-            MainVM.Chats.First(x => x.Id == chatId).LastMessage = "Image";
+            ChatModel chatModel = MainVM.Chats.First(c => c.Id == chatId);
+            MainVM.Chats.Remove(chatModel);
+            chatModel.LastMessage = "Image";
+            MainVM.Chats.Insert(0, chatModel);
         }
 
         public void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId)
@@ -114,7 +118,10 @@ namespace MessengerClient
                 });
             }
 
-            MainVM.Chats.First(x => x.Id == chatId).LastMessage = text;
+            ChatModel chatModel = MainVM.Chats.First(c => c.Id == chatId);
+            MainVM.Chats.Remove(chatModel);
+            chatModel.LastMessage = text;
+            MainVM.Chats.Insert(0, chatModel);
         }
     }        
 }

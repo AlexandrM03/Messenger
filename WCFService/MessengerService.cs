@@ -259,6 +259,8 @@ namespace WCFService
                 Message message = new Message() { Text = text, Date = dateTime, Media = null, User = sender, Chat = chat };
                 uow.MessageRepository.Add(message);
 
+                uow.Save();
+
                 List<int> retrievers = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat).Select(cu => cu.User.Id).ToList();
                 foreach (int userId in retrievers)
                 {
@@ -269,8 +271,6 @@ namespace WCFService
                             .SendMessageCallback(message.Id, message.Text, message.Date, sender.Name, sender.Surname, media.Path, chatId);
                     }
                 }
-
-                uow.Save();
             }
         }
 
