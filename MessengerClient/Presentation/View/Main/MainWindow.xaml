@@ -44,7 +44,9 @@
                                             <DockPanel.Style>
                                                 <Style TargetType="{x:Type DockPanel}">
                                                     <Style.Triggers>
-                                                        <!--<DataTrigger Binding="Use"-->
+                                                        <DataTrigger Binding="{Binding IsSelected}" Value="True">
+                                                            <Setter Property="Background" Value="{DynamicResource ChatBrush}"/>
+                                                        </DataTrigger>
                                                         <Trigger Property="IsMouseOver" Value="True">
                                                             <Setter Property="Background" Value="{DynamicResource SelectionBrush}"/>
                                                         </Trigger>

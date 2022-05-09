@@ -76,11 +76,15 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
         private void AcccountOpen(object obj)
         {
+            ClearSelection();
+
             MainContent = navigation.GetPage("account");
         }
 
         private void SearchOpen(object obj)
         {
+            ClearSelection();
+
             MainContent = navigation.GetPage("search");
         }
 
@@ -88,6 +92,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         {
             if (!(obj is ChatModel chat))
                 return;
+
+            ClearSelection();
+            Chats.First(x => x.Id == chat.Id).IsSelected = true;
+            
 
             CurrentChat.SetNewChat(chat);
             CurrentClient.Callback.ChatVM.Chat = chat;
@@ -114,6 +122,14 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             }
             CurrentClient.Callback.ChatVM.Messages = messages;
             MainContent = navigation.GetPage("chat");
+        }
+
+        private void ClearSelection()
+        {
+            foreach (ChatModel item in Chats)
+            {
+                item.IsSelected = false;
+            }
         }
     }
 }
