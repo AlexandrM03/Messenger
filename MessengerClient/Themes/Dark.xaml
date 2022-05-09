@@ -3,8 +3,11 @@
     <SolidColorBrush x:Key="HighPanelBrush"
                      Color="#242F3D"/>
 
-    <SolidColorBrush x:Key="HighPanelTextBrush"
-                     Color="White"/> 
+    <SolidColorBrush x:Key="MainTextBrush"
+                     Color="White"/>
+
+    <SolidColorBrush x:Key="SecondaryTextBrush"
+                     Color="#7F91A4"/>
 
     <SolidColorBrush x:Key="MainBackgroundBrush"
                      Color="#0E1621"/>
@@ -14,6 +17,9 @@
 
     <SolidColorBrush x:Key="ChatBrush"
                      Color="#2B5278"/>
+
+    <SolidColorBrush x:Key="SelectionBrush"
+                     Color="#202B36"/>
 
     <SolidColorBrush x:Key="NavigationBrush"
                      Color="#17212B"/>

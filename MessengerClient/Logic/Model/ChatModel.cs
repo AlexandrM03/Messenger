@@ -13,5 +13,6 @@ namespace MessengerClient.Logic.Model
         public int Admin { get; set; }
         public string Image { get; set; }
         public string LastMessage { get; set; }
+        
     }
 }
