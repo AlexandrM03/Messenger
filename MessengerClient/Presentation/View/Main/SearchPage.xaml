@@ -20,35 +20,41 @@
         <Grid Grid.Column="0">
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <StackPanel Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal">
-                        <TextBox Height="40" Width="400" Margin="15"
-                     Text="{Binding Path=SearchText}"/>
-                        <Button Content="Search" Height="40" Width="100"
-                        Command="{Binding Path=SearchCommand}"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <TextBox Text="{Binding Path=SearchText}" Margin="3"
+                                 Width="300" Background="Transparent" BorderBrush="{DynamicResource ChatsBackgroundBrush}"
+                                 Foreground="{DynamicResource MainTextBrush}" FontSize="16">
+                        </TextBox>
+                        <Button Height="40" Background="Transparent" BorderBrush="{x:Null}"
+                                Command="{Binding Path=SearchCommand}">
+                            <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\search_icon.png"/>
+                        </Button>
                     </StackPanel>
 
                     <StackPanel x:Name="users">
                         <ItemsControl ItemsSource="{Binding Path=Users}" x:Name="myItems">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="15">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="15">
+                                        <StackPanel.Resources>
+                                            <Style TargetType="TextBlock">
+                                                <Setter Property="FontSize" Value="32"/>
+                                                <Setter Property="Foreground" Value="{DynamicResource MainTextBrush}"/>
+                                            </Style>
+                                        </StackPanel.Resources>
                                         <StackPanel.InputBindings>
                                             <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SelectItemCommand}"
                                                   CommandParameter="{Binding}"
                                                   MouseAction="LeftClick"/>
                                         </StackPanel.InputBindings>
-                                        <Image Source="{Binding Path=Avatar}" Width="100"/>
-                                        <StackPanel Orientation="Horizontal">
-                                            <StackPanel.Resources>
-                                                <Style TargetType="TextBlock">
-                                                    <Setter Property="FontSize" Value="32"/>
-                                                    <Setter Property="Foreground" Value="{DynamicResource HighPanelTextBrush}"/>
-                                                </Style>
-                                            </StackPanel.Resources>
-                                            <TextBlock Text="{Binding Path=Name}"/>
-                                            <TextBlock Text=" "/>
-                                            <TextBlock Text="{Binding Path=Surname}"/>
-                                        </StackPanel>
+                                        <Ellipse Width="60" Height="60" Margin="10 0 10 0">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="Fill" ImageSource="{Binding Path=Avatar}"/>
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <TextBlock Text="{Binding Path=Name}"/>
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding Path=Surname}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
@@ -62,7 +68,11 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <StackPanel>
                     <StackPanel Margin="15">
-                        <TextBox Text="{Binding Path=ChatModel.Name}"/>
+                        <TextBlock Text="Name" Foreground="{DynamicResource MainTextBrush}"/>
+                        <TextBox Text="{Binding Path=ChatModel.Name}" Margin="3"
+                                 Background="Transparent" BorderBrush="{DynamicResource ChatsBackgroundBrush}"
+                                 Foreground="{DynamicResource MainTextBrush}" FontSize="16">
+                        </TextBox>
                         <Button Content="Choose image" Height="40" Width="100"
                             Command="{Binding Path=ChooseImageCommand}"/>
                         <Button Content="Create chat" Height="40" Width="100"
@@ -75,7 +85,7 @@
                                     <StackPanel.Resources>
                                         <Style TargetType="TextBlock">
                                             <Setter Property="FontSize" Value="16"/>
-                                            <Setter Property="Foreground" Value="{DynamicResource HighPanelTextBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource MainTextBrush}"/>
                                         </Style>
                                     </StackPanel.Resources>
                                     <TextBlock Text="{Binding Path=Name}"/>

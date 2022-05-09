@@ -18,8 +18,9 @@
         </Style>
     </Page.Resources>
     <Grid Background="{DynamicResource MainBackgroundBrush}">
-        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" Margin="20">
-            <Button Command="{Binding Path=ChangeAvatarCommand}">
+        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Command="{Binding Path=ChangeAvatarCommand}"
+                    Background="Transparent" BorderBrush="{x:Null}">
                 <Image x:Name="image"
                    Source="{Binding Path=Avatar}"
                    Width="300"
@@ -27,10 +28,12 @@
             </Button>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock x:Name="name"
-                       Text="{Binding Path=Name}"/>
+                           Text="{Binding Path=Name}"
+                           Foreground="{DynamicResource MainTextBrush}"/>
                 <TextBlock Text=" "/>
                 <TextBlock x:Name="surname"
-                       Text="{Binding Path=Surname}"/>
+                           Text="{Binding Path=Surname}"
+                           Foreground="{DynamicResource MainTextBrush}"/>
             </StackPanel>
         </StackPanel>
     </Grid>
