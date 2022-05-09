@@ -82,7 +82,7 @@ namespace MessengerClient
             ReportVM.Reports.Add(report);
         }
 
-        public void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId)
+        public void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId, int senderId)
         {
             if (CurrentChat.Chat.Id == chatId)
             {
@@ -93,7 +93,8 @@ namespace MessengerClient
                     Date = date.ToString(),
                     Name = name,
                     Surname = surname,
-                    Avatar = avatar
+                    Avatar = avatar,
+                    IsMine = senderId == CurrentUser.User.Id
                 });
             }
 
@@ -103,7 +104,7 @@ namespace MessengerClient
             MainVM.Chats.Insert(0, chatModel);
         }
 
-        public void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId)
+        public void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId, int senderId)
         {
             if (CurrentChat.Chat.Id == chatId)
             {
@@ -114,7 +115,8 @@ namespace MessengerClient
                     Date = date.ToString(),
                     Name = name,
                     Surname = surname,
-                    Avatar = avatar
+                    Avatar = avatar,
+                    IsMine = senderId == CurrentUser.User.Id
                 });
             }
 

@@ -125,13 +125,13 @@ namespace MessengerClient.ServiceMessenger {
         void CreateChatCallback(int id, string name, int admin, string path);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendMessageCallback")]
-        void SendMessageCallback(int id, string text, System.DateTime date, string name, string surname, string avatar, int chatId);
+        void SendMessageCallback(int id, string text, System.DateTime date, string name, string surname, string avatar, int chatId, int senderId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/AdminUpdate")]
         void AdminUpdate(int id, string name, string surname, string message);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/SendImageCallback")]
-        void SendImageCallback(int id, string path, System.DateTime date, string name, string surname, string avatar, int chatId);
+        void SendImageCallback(int id, string path, System.DateTime date, string name, string surname, string avatar, int chatId, int senderId);
         
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IMessengerService/ReportCallback")]
         void ReportCallback(int id, string name, string surname, System.Collections.Generic.Dictionary<string, string> message);

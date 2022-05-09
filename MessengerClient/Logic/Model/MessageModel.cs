@@ -15,5 +15,6 @@ namespace MessengerClient.Logic.Model
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Avatar { get; set; }
+        public bool IsMine { get; set; }
     }
 }

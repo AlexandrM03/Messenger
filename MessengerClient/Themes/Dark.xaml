@@ -23,4 +23,7 @@
 
     <SolidColorBrush x:Key="NavigationBrush"
                      Color="#17212B"/>
+
+    <SolidColorBrush x:Key="NameTextBrush"
+                     Color="#71B9F9"/>
 </ResourceDictionary>

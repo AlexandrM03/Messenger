@@ -113,6 +113,9 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                     Date = message["date"]
                 };
 
+                if (Int32.Parse(message["senderId"]) == CurrentUser.User.Id)
+                    messageModel.IsMine = true;
+
                 if (message["type"] == "image")
                     messageModel.Path = message["content"];
                 else

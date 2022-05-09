@@ -52,11 +52,11 @@ namespace WCFService
         [OperationContract(IsOneWay = true)]
         void CreateChatCallback(int id, string name, int admin, string path);
         [OperationContract(IsOneWay = true)]
-        void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId);
+        void SendMessageCallback(int id, string text, DateTime date, string name, string surname, string avatar, int chatId, int senderId);
         [OperationContract(IsOneWay = true)]
         void AdminUpdate(int id, string name, string surname, string message);
         [OperationContract(IsOneWay = true)]
-        void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId);
+        void SendImageCallback(int id, string path, DateTime date, string name, string surname, string avatar, int chatId, int senderId);
         [OperationContract(IsOneWay = true)]
         void ReportCallback(int id, string name, string surname, Dictionary<string, string> message);
         [OperationContract(IsOneWay = true)]

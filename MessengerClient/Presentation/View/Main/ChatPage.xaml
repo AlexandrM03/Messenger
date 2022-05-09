@@ -19,7 +19,8 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-            <TextBlock Text="{Binding Path=Chat.Name}" Foreground="{DynamicResource HighPanelTextBrush}" Margin="5">
+            <TextBlock Text="{Binding Path=Chat.Name}" Foreground="{DynamicResource MainTextBrush}"
+                       FontSize="16" Margin="5">
                 <TextBlock.InputBindings>
                     <MouseBinding Command="{Binding Path=GoToChatInfoCommand}" MouseAction="LeftClick" />
                 </TextBlock.InputBindings>
@@ -32,27 +33,45 @@
                     <ItemsControl ItemsSource="{Binding Path=Messages}" x:Name="myItems">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}" Margin="3">
-                                    <!--<StackPanel.InputBindings>
-                                        <MouseBinding Command="{Binding ElementName=myItems, Path=DataContext.SendMessageCommand}"
-                                                  CommandParameter="{Binding}"
-                                                  MouseAction="LeftClick"/>
-                                    </StackPanel.InputBindings>-->
-                                    <Image Source="{Binding Path=Avatar}" Width="30" Height="30" VerticalAlignment="Top"/>
-                                    <StackPanel Orientation="Vertical">
-                                        <StackPanel Orientation="Horizontal">
-                                            <TextBlock Text="{Binding Path=Name}"/>
-                                            <TextBlock Text=" "/>
-                                            <TextBlock Text="{Binding Path=Surname}"/>
-                                            <TextBlock Text=" "/>
-                                            <TextBlock Text="{Binding Path=Date}"/>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="3">
+                                    <Ellipse Width="40" Height="40" Margin="10 0 10 0">
+                                        <Ellipse.Fill>
+                                            <ImageBrush Stretch="Fill" ImageSource="{Binding Path=Avatar}"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Border CornerRadius="5" Padding="5">
+                                        <Border.Style>
+                                            <Style TargetType="{x:Type Border}">
+                                                <Setter Property="Background" Value="{DynamicResource ChatsBackgroundBrush}"/>
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding Path=IsMine}" Value="True">
+                                                        <Setter Property="Background" Value="{DynamicResource ChatBrush}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Border.Style>
+                                        <StackPanel Orientation="Horizontal" Margin="3">
+                                            <StackPanel Orientation="Vertical">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Name}" FontSize="14" 
+                                                               Foreground="{DynamicResource NameTextBrush}"/>
+                                                    <TextBlock Text=" "/>
+                                                    <TextBlock Text="{Binding Path=Surname}" FontSize="14" 
+                                                               Foreground="{DynamicResource NameTextBrush}"/>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding Path=Text}" FontSize="12" Foreground="{DynamicResource MainTextBrush}"/>
+                                                <Image Source="{Binding Path=Path}" MaxHeight="100"/>
+                                                <TextBlock Text="{Binding Path=Date}" HorizontalAlignment="Right" 
+                                                           Foreground="{DynamicResource SecondaryTextBrush}"
+                                                           FontSize="8"/>
+                                            </StackPanel>
                                         </StackPanel>
-                                        <TextBlock Text="{Binding Path=Text}"/>
-                                        <Image Source="{Binding Path=Path}" MaxHeight="100"/>
-                                    </StackPanel>
-                                    <Button Height="30" Width="30" BorderBrush="{x:Null}" Background="{DynamicResource ChatBrush}"
+                                    </Border>
+                                    <Button Height="25" Width="25" BorderBrush="{x:Null}" Margin="5 0 0 0"
                                             Command="{Binding ElementName=myItems, Path=DataContext.SendReportCommand}"
-                                            CommandParameter="{Binding}">
+                                            CommandParameter="{Binding}"
+                                            VerticalAlignment="Bottom"
+                                            Background="Transparent">
                                         <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\report_icon.png"/>
                                     </Button>
                                 </StackPanel>
@@ -64,15 +83,20 @@
         </Grid>
 
         <Grid Grid.Row="2">
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Image" Width="50" Margin="5" Command="{Binding Path=SendImageCommand}"/>
-                <TextBox Text="{Binding Path=Message.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="5" Width="800">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch">
+                <Button Command="{Binding Path=SendImageCommand}" Background="Transparent" BorderBrush="{x:Null}">
+                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\image_icon.png"/>
+                </Button>
+                <TextBox Text="{Binding Path=Message.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Margin="3"
+                         Width="900" Background="Transparent" BorderBrush="{DynamicResource ChatsBackgroundBrush}"
+                         Foreground="{DynamicResource MainTextBrush}" FontSize="16">
                     <TextBox.InputBindings>
                         <KeyBinding Key="Return" Command="{Binding Path=SendMessageCommand}"/>
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Content="Send" Width="50" Margin="5"
-                        Command="{Binding Path=SendMessageCommand}"/>
+                <Button Command="{Binding Path=SendMessageCommand}" Background="Transparent" BorderBrush="{x:Null}">
+                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\send_icon.png"/>
+                </Button>
             </StackPanel>
         </Grid>
     </Grid>

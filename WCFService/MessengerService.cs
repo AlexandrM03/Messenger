@@ -230,6 +230,7 @@ namespace WCFService
                     messageDict.Add("surname", user.Surname);
                     messageDict.Add("path", media.Path);
                     messageDict.Add("date", message.Date.ToString());
+                    messageDict.Add("senderId", user.Id.ToString());
 
                     if (message.Text == null)
                     {
@@ -268,7 +269,7 @@ namespace WCFService
                     if (connectedUser != null)
                     {
                         connectedUser.OperationContext.GetCallbackChannel<IMessengerCallback>()
-                            .SendMessageCallback(message.Id, message.Text, message.Date, sender.Name, sender.Surname, media.Path, chatId);
+                            .SendMessageCallback(message.Id, message.Text, message.Date, sender.Name, sender.Surname, media.Path, chatId, senderId);
                     }
                 }
             }
@@ -293,7 +294,7 @@ namespace WCFService
                     if (connectedUser != null)
                     {
                         connectedUser.OperationContext.GetCallbackChannel<IMessengerCallback>()
-                            .SendImageCallback(message.Id, path, message.Date, sender.Name, sender.Surname, media.Path, chatId);
+                            .SendImageCallback(message.Id, path, message.Date, sender.Name, sender.Surname, media.Path, chatId, senderId);
                     }
                 }
 
