@@ -51,5 +51,34 @@ namespace MessengerClient
         {
             WindowState = WindowState.Minimized;
         }
+
+        private void ChangeTheme_Click(object sender, RoutedEventArgs e)
+        {
+            if (!imageTheme.Source.ToString().Contains("dark"))
+            {
+                ResourceDictionary dictionary = new ResourceDictionary();
+                dictionary.Source = new Uri(String.Format("Themes/Light.xaml"), UriKind.Relative);
+                ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.First(n =>
+                    n.Source.OriginalString.StartsWith("Themes/"));
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dictionary);
+
+                imageTheme.Source = new BitmapImage(new Uri(@"D:\4 семестр\КП ООП\Messenger\Resources\dark_icon.png"));
+            }
+            else
+            {
+                ResourceDictionary dictionary = new ResourceDictionary();
+                dictionary.Source = new Uri(String.Format("Themes/Dark.xaml"), UriKind.Relative);
+                ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.First(n =>
+                    n.Source.OriginalString.StartsWith("Themes/"));
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dictionary);
+
+                imageTheme.Source = new BitmapImage(new Uri(@"D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"));
+
+            }
+        }
     }
 }

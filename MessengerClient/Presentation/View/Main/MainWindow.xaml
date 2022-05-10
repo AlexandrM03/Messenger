@@ -120,6 +120,9 @@
                         <Button Background="Transparent" Width="50" Command="{Binding Path=GoToAccount}" BorderBrush="{x:Null}">
                             <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\info_icon.png"/>
                         </Button>
+                        <Button x:Name="themeChange" Background="Transparent" Width="50" Click="ChangeTheme_Click" BorderBrush="{x:Null}">
+                            <Image x:Name="imageTheme" Source="D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"/>
+                        </Button>
                     </StackPanel>
                 </Grid>
             </Grid>
