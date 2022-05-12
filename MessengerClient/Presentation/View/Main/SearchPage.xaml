@@ -11,6 +11,26 @@
     <Page.DataContext>
         <vm:SearchVM/>
     </Page.DataContext>
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Background="{DynamicResource MainBackgroundBrush}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -73,10 +93,16 @@
                                  Background="Transparent" BorderBrush="{DynamicResource ChatsBackgroundBrush}"
                                  Foreground="{DynamicResource MainTextBrush}" FontSize="16">
                         </TextBox>
-                        <Button Content="Choose image" Height="40" Width="100"
-                            Command="{Binding Path=ChooseImageCommand}"/>
-                        <Button Content="Create chat" Height="40" Width="100"
-                            Command="{Binding Path=CreateChatCommand}"/>
+                        <Border CornerRadius="10" Height="40" Width="100" Margin="5"
+                                Background="{DynamicResource ChatBrush}" HorizontalAlignment="Right">
+                            <Button Content="Choose image" Background="Transparent" BorderBrush="{x:Null}"
+                                Command="{Binding Path=ChooseImageCommand}"/>
+                        </Border>
+                        <Border CornerRadius="10" Height="40" Width="100" Margin="5"
+                                Background="{DynamicResource ChatBrush}" HorizontalAlignment="Right">
+                            <Button Content="Create chat" Background="Transparent" BorderBrush="{x:Null}"
+                                Command="{Binding Path=CreateChatCommand}"/>
+                        </Border>
                     </StackPanel>
                     <ItemsControl ItemsSource="{Binding Path=SelectedUsers}">
                         <ItemsControl.ItemTemplate>

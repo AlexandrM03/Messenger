@@ -6,20 +6,70 @@
         xmlns:local="clr-namespace:MessengerClient.Presentation.View.Admin"
         xmlns:vm="clr-namespace:MessengerClient.Logic.ViewModel.AdminVM"
         mc:Ignorable="d"
-        Title="Admin" Width="1280" Height="720">
+        Title="Admin" Width="1280" Height="720"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
     <Window.DataContext>
         <vm:AdminVM/>
     </Window.DataContext>
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Grid Grid.Row="0" Background="{DynamicResource HighPanelBrush}">
+
+        <Grid Grid.Row="0" Background="{DynamicResource HighPanelBrush}"
+                  MouseDown="Grid_MouseDown">
             <TextBlock Text="Odnogruppniki" 
-                       Foreground="{DynamicResource HighPanelTextBrush}"
+                       Foreground="{DynamicResource MainTextBrush}"
                        HorizontalAlignment="Center"/>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Background="Transparent" Width="20" BorderBrush="{x:Null}"
+                            Click="Minimize_Click">
+                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\minimize_icon.png"/>
+                </Button>
+                <Button Background="Transparent" Width="20" BorderBrush="{x:Null}"
+                            Click="Maximize_Click">
+                    <Image>
+                        <Image.Style>
+                            <Style TargetType="{x:Type Image}">
+                                <Setter Property="Source" Value="D:\4 семестр\КП ООП\Messenger\Resources\maximize_icon.png"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding WindowState, ElementName=mainWindow}" Value="Maximized">
+                                        <Setter Property="Source" Value="D:\4 семестр\КП ООП\Messenger\Resources\restore_icon.png"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Image.Style>
+                    </Image>
+                </Button>
+                <Button Background="Transparent" Width="20" BorderBrush="{x:Null}"
+                            Click="Close_Click">
+                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\close_icon.png"/>
+                </Button>
+            </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -39,6 +89,9 @@
                     </Button>
                     <Button Background="Transparent" Width="50" Command="{Binding Path=GoToReportsCommand}" BorderBrush="{x:Null}">
                         <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\report_icon.png"/>
+                    </Button>
+                    <Button x:Name="themeChange" Background="Transparent" Width="50" Click="ChangeTheme_Click" BorderBrush="{x:Null}">
+                        <Image x:Name="imageTheme" Source="D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"/>
                     </Button>
                 </StackPanel>
             </Grid>

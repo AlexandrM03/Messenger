@@ -23,5 +23,60 @@ namespace MessengerClient.Presentation.View.Admin
         {
             InitializeComponent();
         }
+
+        private void Grid_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+                this.DragMove();
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentClient.Client.Disconnect(CurrentUser.User.Id);
+
+            Close();
+        }
+
+        private void Maximize_Click(object sender, RoutedEventArgs e)
+        {
+            if (WindowState == WindowState.Normal)
+                WindowState = WindowState.Maximized;
+            else
+                WindowState = WindowState.Normal;
+        }
+
+        private void Minimize_Click(object sender, RoutedEventArgs e)
+        {
+            WindowState = WindowState.Minimized;
+        }
+
+        private void ChangeTheme_Click(object sender, RoutedEventArgs e)
+        {
+            if (!imageTheme.Source.ToString().Contains("dark"))
+            {
+                ResourceDictionary dictionary = new ResourceDictionary();
+                dictionary.Source = new Uri(String.Format("Themes/Light.xaml"), UriKind.Relative);
+                ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.First(n =>
+                    n.Source.OriginalString.StartsWith("Themes/"));
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dictionary);
+
+                imageTheme.Source = new BitmapImage(new Uri(@"D:\4 семестр\КП ООП\Messenger\Resources\dark_icon.png"));
+            }
+            else
+            {
+                ResourceDictionary dictionary = new ResourceDictionary();
+                dictionary.Source = new Uri(String.Format("Themes/Dark.xaml"), UriKind.Relative);
+                ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.First(n =>
+                    n.Source.OriginalString.StartsWith("Themes/"));
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dictionary);
+
+                imageTheme.Source = new BitmapImage(new Uri(@"D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"));
+
+            }
+        }
     }
 }
