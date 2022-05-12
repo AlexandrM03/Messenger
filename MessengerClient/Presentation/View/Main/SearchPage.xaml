@@ -88,19 +88,19 @@
             <ScrollViewer VerticalScrollBarVisibility="Hidden">
                 <StackPanel>
                     <StackPanel Margin="15">
-                        <TextBlock Text="Name" Foreground="{DynamicResource MainTextBrush}"/>
+                        <TextBlock Text="{DynamicResource name}" Foreground="{DynamicResource MainTextBrush}"/>
                         <TextBox Text="{Binding Path=ChatModel.Name}" Margin="3"
                                  Background="Transparent" BorderBrush="{DynamicResource ChatsBackgroundBrush}"
                                  Foreground="{DynamicResource MainTextBrush}" FontSize="16">
                         </TextBox>
                         <Border CornerRadius="10" Height="40" Width="100" Margin="5"
                                 Background="{DynamicResource ChatBrush}" HorizontalAlignment="Right">
-                            <Button Content="Choose image" Background="Transparent" BorderBrush="{x:Null}"
+                            <Button Content="{DynamicResource choose_image}" Background="Transparent" BorderBrush="{x:Null}"
                                 Command="{Binding Path=ChooseImageCommand}"/>
                         </Border>
                         <Border CornerRadius="10" Height="40" Width="100" Margin="5"
                                 Background="{DynamicResource ChatBrush}" HorizontalAlignment="Right">
-                            <Button Content="Create chat" Background="Transparent" BorderBrush="{x:Null}"
+                            <Button Content="{DynamicResource create_chat}" Background="Transparent" BorderBrush="{x:Null}"
                                 Command="{Binding Path=CreateChatCommand}"/>
                         </Border>
                     </StackPanel>

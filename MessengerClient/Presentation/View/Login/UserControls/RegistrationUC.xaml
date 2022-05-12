@@ -39,6 +39,24 @@
                 <Setter Property="Margin" Value="0 5 0 10"/>
             </Style.Setters>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10">
@@ -58,7 +76,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <Button Command="{Binding Path=OpenFileDialogCommand}" Content="Choose image"/>
-                <Image x:Name="path" 
+                <Image x:Name="path" Margin="65 0 0 0"
                        Source="{Binding Path=RegistrationModel.Path}"
                        Width="50" Height="50"/>
             </StackPanel>

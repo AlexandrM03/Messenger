@@ -17,7 +17,13 @@
                 <ItemsControl ItemsSource="{Binding Path=UserInfo}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource MainTextBrush}"/>
+                                        <Setter Property="FontSize" Value="24"/>
+                                    </Style>
+                                </StackPanel.Resources>
                                 <TextBlock Text="{Binding Path=Id}"/>
                                 <TextBlock Text="|"/>
                                 <TextBlock Text="{Binding Path=Name}"/>

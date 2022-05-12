@@ -11,13 +11,39 @@
     <Page.DataContext>
         <vm:ReportVM/>
     </Page.DataContext>
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
     <Grid Background="{DynamicResource ChatsBackgroundBrush}">
         <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="25">
             <StackPanel x:Name="report_info">
                 <ItemsControl ItemsSource="{Binding Path=Reports}" x:Name="myItems">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Background="{DynamicResource ChatBrush}">
+                            <StackPanel Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{DynamicResource MainTextBrush}"/>
+                                        <Setter Property="FontSize" Value="24"/>
+                                    </Style>
+                                </StackPanel.Resources>
                                 <TextBlock Text="{Binding Path=Id}"/>
                                 <TextBlock Text="|"/>
                                 <TextBlock Text="{Binding Path=Message.Name}"/>
@@ -27,11 +53,11 @@
                                 <TextBlock Text="{Binding Path=Message.Text}"/>
                                 <Image Source="{Binding Path=Message.Path}" MaxHeight="100"/>
                                 <Button Background="Transparent" Width="50" Command="{Binding ElementName=myItems, Path=DataContext.AcceptReportCommand}" 
-                                        CommandParameter="{Binding}" BorderBrush="{x:Null}">
+                                        CommandParameter="{Binding}" BorderBrush="{x:Null}" Margin="5">
                                     <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\accept_icon.png"/>
                                 </Button>
                                 <Button Background="Transparent" Width="50" Command="{Binding ElementName=myItems, Path=DataContext.DeclineReportCommand}" 
-                                        CommandParameter="{Binding}" BorderBrush="{x:Null}">
+                                        CommandParameter="{Binding}" BorderBrush="{x:Null}" Margin="5">
                                     <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\decline_icon.png"/>
                                 </Button>
                             </StackPanel>

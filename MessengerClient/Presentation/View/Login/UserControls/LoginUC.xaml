@@ -35,6 +35,24 @@
                 <Setter Property="Margin" Value="0 5 0 10"/>
             </Style.Setters>
         </Style>
+        <Style TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0" BorderBrush="Black" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="15">
@@ -45,9 +63,12 @@
             <PasswordBox x:Name="password"/>
 
             <Button Margin="0 20 0 0"
+                    Foreground="Gray"
+                    FontSize="24"
                     Command="{Binding Path=SignInCommand}"
                     CommandParameter="{Binding ElementName=password}"
-                    Content="Enter"/>
+                    Content="Enter"
+                    Width="80"/>
         </StackPanel>
     </Grid>
 </UserControl>
