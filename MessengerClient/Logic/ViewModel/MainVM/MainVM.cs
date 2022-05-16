@@ -3,6 +3,7 @@ using MessengerClient.ServiceMessenger;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         public ICommand GoToAccount { get; private set; }
         public ICommand GoToSearch { get; private set; }
         public ICommand GoToChat { get; private set; }
+        public ICommand GoToGithub { get; private set; }
 
         public MainVM()
         {
@@ -57,6 +59,7 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             GoToAccount = new DelegateCommand(AcccountOpen);
             GoToSearch = new DelegateCommand(SearchOpen);
             GoToChat = new DelegateCommand(ChatOpen);
+            GoToGithub = new DelegateCommand(GithubOpen);
 
             chats = new ObservableCollection<ChatModel>();
 
@@ -125,6 +128,13 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             }
             CurrentClient.Callback.ChatVM.Messages = messages;
             MainContent = navigation.GetPage("chat");
+        }
+
+        private void GithubOpen(object obj)
+        {
+            Process.Start(new ProcessStartInfo("cmd", $"/c start {obj.ToString()}") { 
+                CreateNoWindow = true
+            });
         }
 
         private void ClearSelection()
