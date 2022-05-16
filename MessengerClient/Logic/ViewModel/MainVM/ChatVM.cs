@@ -107,7 +107,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                     Avatar = user["avatar"]
                 };
 
-                userModels.Add(userModel);
+                if (userModel.Id == CurrentChat.Chat.Admin)
+                    userModels.Insert(0, userModel);
+                else
+                    userModels.Add(userModel);
             }
 
             CurrentClient.Callback.ChatInfoVM.Users = userModels;

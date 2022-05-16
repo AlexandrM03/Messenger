@@ -78,5 +78,33 @@ namespace MessengerClient.Presentation.View.Admin
 
             }
         }
+
+        private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            if (!imageLanguage.Source.ToString().Contains("en_icon"))
+            {
+                ResourceDictionary dictionary = new ResourceDictionary();
+                dictionary.Source = new Uri(String.Format("Languages/Ru.xaml"), UriKind.Relative);
+                ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.First(n =>
+                    n.Source.OriginalString.StartsWith("Languages/"));
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dictionary);
+
+                imageLanguage.Source = new BitmapImage(new Uri(@"D:\4 семестр\КП ООП\Messenger\Resources\en_icon.png"));
+            }
+            else
+            {
+                ResourceDictionary dictionary = new ResourceDictionary();
+                dictionary.Source = new Uri(String.Format("Languages/En.xaml"), UriKind.Relative);
+                ResourceDictionary oldDictionary = Application.Current.Resources.MergedDictionaries.First(n =>
+                    n.Source.OriginalString.StartsWith("Languages/"));
+                int ind = Application.Current.Resources.MergedDictionaries.IndexOf(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Remove(oldDictionary);
+                Application.Current.Resources.MergedDictionaries.Insert(ind, dictionary);
+
+                imageLanguage.Source = new BitmapImage(new Uri(@"D:\4 семестр\КП ООП\Messenger\Resources\ru_icon.png"));
+            }
+        }
     }
 }

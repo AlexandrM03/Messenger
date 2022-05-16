@@ -72,14 +72,15 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             //MessengerServiceClient client = new MessengerServiceClient(null);
             foreach (Dictionary<string, string> user in CurrentClient.Client.GetUsers())
             {
-                users.Add(new UserModel()
-                {
-                    Id = Int32.Parse(user["id"]),
-                    Name = user["name"],
-                    Surname = user["surname"],
-                    Role = user["role"],
-                    Avatar = user["path"]
-                });
+                if (CurrentUser.User.Id != Int32.Parse(user["id"]))
+                    users.Add(new UserModel()
+                    {
+                        Id = Int32.Parse(user["id"]),
+                        Name = user["name"],
+                        Surname = user["surname"],
+                        Role = user["role"],
+                        Avatar = user["path"]
+                    });
             }
             searchUsers = users;
             chatModel = new ChatModel();

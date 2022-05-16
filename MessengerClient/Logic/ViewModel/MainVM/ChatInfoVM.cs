@@ -69,7 +69,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
 
         private bool CanExecute(object obj)
         {
-            return CurrentUser.User.Id == CurrentChat.Chat.Admin;
+            if (!(obj is UserModel user))
+                return false;
+
+            return CurrentUser.User.Id == CurrentChat.Chat.Admin || CurrentUser.User.Id == user.Id;
         }
     }
 }

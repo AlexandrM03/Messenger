@@ -11,7 +11,8 @@
             <Style.Setters>
                 <Setter Property="FontFamily" Value="Arial"/>
                 <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Foreground" Value="Gray"/>
+                <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush}"/>
+                <Setter Property="Margin" Value="0 5 0 0"/>
             </Style.Setters>
         </Style>
         <Style TargetType="TextBlock" x:Key="help_text">
@@ -24,7 +25,9 @@
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="BorderThickness" Value="0 0 0 2"/>
                 <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Margin" Value="0 5 0 10"/>
+                <Setter Property="Margin" Value="0 0 0 10"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource MainTextBrush}"/>
             </Style.Setters>
         </Style>
         <Style TargetType="PasswordBox">
@@ -33,6 +36,8 @@
                 <Setter Property="BorderThickness" Value="0 0 0 2"/>
                 <Setter Property="FontSize" Value="15"/>
                 <Setter Property="Margin" Value="0 5 0 10"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="{DynamicResource MainTextBrush}"/>
             </Style.Setters>
         </Style>
         <Style TargetType="Button">
@@ -63,7 +68,7 @@
             <PasswordBox x:Name="password"/>
 
             <Button Margin="0 20 0 0"
-                    Foreground="Gray"
+                    Foreground="{DynamicResource MainTextBrush}"
                     FontSize="24"
                     Command="{Binding Path=SignInCommand}"
                     CommandParameter="{Binding ElementName=password}"

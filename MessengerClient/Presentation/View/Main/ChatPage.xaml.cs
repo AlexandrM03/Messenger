@@ -23,6 +23,8 @@ namespace MessengerClient.Presentation.View.Main
         public ChatPage()
         {
             InitializeComponent();
+
+            scrollViewer.ScrollToBottom();
         }
     }
 }

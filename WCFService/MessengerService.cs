@@ -284,8 +284,11 @@ namespace WCFService
                 Chat chat = uow.ChatRepository.GetAll().Where(c => c.Id == chatId).FirstOrDefault();
                 Media image = new Media() { Path = path };
                 uow.MediaRepository.Add(image);
+                uow.Save();
+                
                 Message message = new Message() { Text = null, Date = dateTime, Media = image, User = sender, Chat = chat };
                 uow.MessageRepository.Add(message);
+                uow.Save();
 
                 List<int> retrievers = uow.ChatUserRepository.GetAll().Where(cu => cu.Chat == chat).Select(cu => cu.User.Id).ToList();
                 foreach (int userId in retrievers)

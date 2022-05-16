@@ -93,6 +93,9 @@
                     <Button x:Name="themeChange" Background="Transparent" Width="50" Click="ChangeTheme_Click" BorderBrush="{x:Null}">
                         <Image x:Name="imageTheme" Source="D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"/>
                     </Button>
+                    <Button x:Name="languageChange" Background="Transparent" Width="50" Click="ChangeLanguage_Click" BorderBrush="{x:Null}">
+                        <Image x:Name="imageLanguage" Source="D:\4 семестр\КП ООП\Messenger\Resources\ru_icon.png"/>
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>
