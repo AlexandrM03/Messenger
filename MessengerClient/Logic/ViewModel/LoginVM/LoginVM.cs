@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -45,6 +46,15 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
             if (String.IsNullOrEmpty(LoginModel.Password))
             {
                 MessageBox.Show("Enter the password");
+                return;
+            }
+            if (String.IsNullOrEmpty(LoginModel.Login))
+            {
+                MessageBox.Show("Login is required");
+                return;
+            }
+            if (!Regex.IsMatch(LoginModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$")) {
+                MessageBox.Show("Incorrect login");
                 return;
             }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MessengerClient.Presentation.View.Login;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +37,16 @@ namespace MessengerClient
         {
             CurrentClient.Client.Disconnect(CurrentUser.User.Id);
 
+            Close();
+        }
+
+        private void Logout_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentClient.Client.Disconnect(CurrentUser.User.Id);
+
+            Sign sign = new Sign();
+            sign.Show();
+            
             Close();
         }
 

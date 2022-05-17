@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -69,11 +70,36 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
 
         private void Registration(object obj)
         {
-            //if (!(obj is PasswordBox passwordBox))
-            //    return;
-
-            //RegistrationModel.Password = passwordBox.Password;
-            //RegistrationModel.RepeatPassword = passwordBox.Password;
+            if (String.IsNullOrEmpty(RegistrationModel.Login))
+            {
+                MessageBox.Show("Login is required");
+                return;
+            }
+            if (!Regex.IsMatch(RegistrationModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
+            {
+                MessageBox.Show("Incorrect login");
+                return;
+            }
+            if (String.IsNullOrEmpty(RegistrationModel.Name))
+            {
+                MessageBox.Show("Name is required");
+                return;
+            }
+            if (!Regex.IsMatch(RegistrationModel.Name, @"^[A-ZА-Я][A-Za-zА-Яа-я]+$"))
+            {
+                MessageBox.Show("Incorrect name");
+                return;
+            }
+            if (String.IsNullOrEmpty(RegistrationModel.Surname))
+            {
+                MessageBox.Show("Surname is required");
+                return;
+            }
+            if (!Regex.IsMatch(RegistrationModel.Surname, @"^[A-ZА-Я][A-Za-zА-Яа-я]+$"))
+            {
+                MessageBox.Show("Incorrect surname");
+                return;
+            }
 
             if (RegistrationModel.Password != RegistrationModel.RepeatPassword)
             {
@@ -86,6 +112,7 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 registrationModel.Name,
                 registrationModel.Surname,
                 registrationModel.Path);
+
             if (result != "Nice")
             {
                 MessageBox.Show(result);

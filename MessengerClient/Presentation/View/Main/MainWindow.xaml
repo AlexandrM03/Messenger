@@ -151,6 +151,9 @@
                                 Command="{Binding Path=GoToGithub}" CommandParameter="https://github.com/AlexandrM03/Messenger">
                             <Image x:Name="imageGithub" Source="D:\4 семестр\КП ООП\Messenger\Resources\github_icon.png"/>
                         </Button>
+                        <Button x:Name="disconnect" Background="Transparent" Margin="5" Width="50" Click="Logout_Click" BorderBrush="{x:Null}">
+                            <Image x:Name="imageDisconnect" Source="D:\4 семестр\КП ООП\Messenger\Resources\logout_icon.png"/>
+                        </Button>
                     </StackPanel>
                 </Grid>
             </Grid>
