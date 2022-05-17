@@ -6,4 +6,10 @@
     <v:String x:Key="name">Название</v:String>
     <v:String x:Key="login">Логин</v:String>
     <v:String x:Key="registration">Регистрация</v:String>
+    <v:String x:Key="password">Пароль</v:String>
+    <v:String x:Key="rpassword">Повторите пароль</v:String>
+    <v:String x:Key="namep">Имя</v:String>
+    <v:String x:Key="surname">Фамилия</v:String>
+    <v:String x:Key="confirm">Подтвердить</v:String>
+    <v:String x:Key="enter">Войти</v:String>
 </ResourceDictionary>

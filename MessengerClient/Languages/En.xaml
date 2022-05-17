@@ -6,4 +6,10 @@
     <v:String x:Key="name">Name</v:String>
     <v:String x:Key="login">Login</v:String>
     <v:String x:Key="registration">Registration</v:String>
+    <v:String x:Key="password">Password</v:String>
+    <v:String x:Key="rpassword">Repeat password</v:String>
+    <v:String x:Key="namep">Name</v:String>
+    <v:String x:Key="surname">Surname</v:String>
+    <v:String x:Key="confirm">Confirm</v:String>
+    <v:String x:Key="enter">Enter</v:String>
 </ResourceDictionary>

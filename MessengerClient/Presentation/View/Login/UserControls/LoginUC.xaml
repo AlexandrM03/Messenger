@@ -11,7 +11,7 @@
             <Style.Setters>
                 <Setter Property="FontFamily" Value="Arial"/>
                 <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SignTextBrush}"/>
                 <Setter Property="Margin" Value="0 5 0 0"/>
             </Style.Setters>
         </Style>
@@ -61,10 +61,10 @@
     </UserControl.Resources>
     <Grid>
         <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="15">
-            <TextBlock HorizontalAlignment="Center" FontWeight="ExtraLight" FontSize="24" Text="Login"/>
-            <TextBlock Text="Login"/>
+            <TextBlock HorizontalAlignment="Center" FontWeight="ExtraLight" FontSize="24" Text="{DynamicResource login}"/>
+            <TextBlock Text="{DynamicResource login}"/>
             <TextBox x:Name="login" Text="{Binding Path=LoginModel.Login}"/>
-            <TextBlock Text="Password"/>
+            <TextBlock Text="{DynamicResource password}"/>
             <PasswordBox x:Name="password"/>
 
             <Button Margin="0 20 0 0"
@@ -72,7 +72,7 @@
                     FontSize="24"
                     Command="{Binding Path=SignInCommand}"
                     CommandParameter="{Binding ElementName=password}"
-                    Content="Enter"
+                    Content="{DynamicResource enter}"
                     Width="80"/>
         </StackPanel>
     </Grid>

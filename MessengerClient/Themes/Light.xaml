@@ -26,4 +26,7 @@
 
     <SolidColorBrush x:Key="NameTextBrush"
                      Color="#71B9F9"/>
+
+    <SolidColorBrush x:Key="SignTextBrush"
+                     Color="#7D7D7D"/>
 </ResourceDictionary>

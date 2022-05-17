@@ -15,7 +15,7 @@
             <Style.Setters>
                 <Setter Property="FontFamily" Value="Arial"/>
                 <Setter Property="FontSize" Value="15"/>
-                <Setter Property="Foreground" Value="{DynamicResource SecondaryTextBrush}"/>
+                <Setter Property="Foreground" Value="{DynamicResource SignTextBrush}"/>
                 <Setter Property="Margin" Value="0 5 0 0"/>
             </Style.Setters>
         </Style>
@@ -72,27 +72,27 @@
                 </Ellipse.Fill>
             </Ellipse>
 
-            <TextBlock Text="Login"/>
+            <TextBlock Text="{DynamicResource login}"/>
             <TextBox x:Name="login" Text="{Binding Path=RegistrationModel.Login}"/>
-            <TextBlock Text="Name"/>
+            <TextBlock Text="{DynamicResource namep}"/>
             <TextBox x:Name="name" Text="{Binding Path=RegistrationModel.Name}"/>
-            <TextBlock Text="Surname"/>
+            <TextBlock Text="{DynamicResource surname}"/>
             <TextBox x:Name="surname" Text="{Binding Path=RegistrationModel.Surname}"/>
 
-            <TextBlock Text="Password"/>
+            <TextBlock Text="{DynamicResource password}"/>
             <PasswordBox x:Name="password"/>
-            <TextBlock Text="Repeat password"/>
+            <TextBlock Text="{DynamicResource rpassword}"/>
             <PasswordBox x:Name="repeatPassword"/>
 
-            <Button Command="{Binding Path=OpenFileDialogCommand}" Content="Choose image" Foreground="{DynamicResource MainTextBrush}"/>
+            <Button Command="{Binding Path=OpenFileDialogCommand}" Content="{DynamicResource choose_image}" Foreground="{DynamicResource MainTextBrush}"/>
 
-            <CheckBox x:Name="checkBox" Margin="0 4 60 3" IsChecked="{Binding Path=IsCheckBoxChecked}" Foreground="{DynamicResource MainTextBrush}">Confirm</CheckBox>
+            <CheckBox x:Name="checkBox" Margin="0 4 60 3" IsChecked="{Binding Path=IsCheckBoxChecked}" Foreground="{DynamicResource MainTextBrush}" Content="{DynamicResource confirm}"/>
 
             <Button Margin="0 20 0 0"
                     Foreground="{DynamicResource MainTextBrush}"
                     Command="{Binding Path=RegistrationCommand}"
                     CommandParameter="{Binding ElementName=password}"
-                    Content="Registration"/>
+                    Content="{DynamicResource registration}"/>
         </StackPanel>
     </Grid>
 </UserControl>

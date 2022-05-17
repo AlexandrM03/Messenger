@@ -48,8 +48,7 @@
             <RowDefinition Height="30"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="0" Orientation="Horizontal"
-                    MouseDown="StackPanel_MouseDown" Background="{DynamicResource HighPanelBrush}">
+        <DockPanel Grid.Row="0" MouseDown="StackPanel_MouseDown" Background="{DynamicResource HighPanelBrush}">
             <TextBlock Style="{StaticResource TopBar}" Text="{DynamicResource login}">
                 <TextBlock.InputBindings>
                     <MouseBinding Command="{Binding Path=GoToLoginCommand}"
@@ -64,17 +63,19 @@
                 </TextBlock.InputBindings>
             </TextBlock>
 
-            <Button x:Name="themeChange" Background="Transparent" Width="20" Click="ChangeTheme_Click" Margin="160 0 5 0">
-                <Image x:Name="imageTheme" Source="D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"/>
-            </Button>
-            <Button x:Name="languageChange" Background="Transparent" Width="20" Click="ChangeLanguage_Click" Margin="0 0 5 0">
-                <Image x:Name="imageLanguage" Source="D:\4 семестр\КП ООП\Messenger\Resources\ru_icon.png"/>
-            </Button>
-            <Button Background="Transparent" Width="20"
-                    Click="Close_Click" Margin="0 0 5 0">
-                <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\close_icon.png"/>
-            </Button>
-        </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="themeChange" Background="Transparent" Width="20" Click="ChangeTheme_Click" Margin="0 0 3 0">
+                    <Image x:Name="imageTheme" Source="D:\4 семестр\КП ООП\Messenger\Resources\light_icon.png"/>
+                </Button>
+                <Button x:Name="languageChange" Background="Transparent" Width="20" Click="ChangeLanguage_Click" Margin="0 0 3 0">
+                    <Image x:Name="imageLanguage" Source="D:\4 семестр\КП ООП\Messenger\Resources\ru_icon.png"/>
+                </Button>
+                <Button Background="Transparent" Width="20"
+                    Click="Close_Click" Margin="0 0 3 0">
+                    <Image Source="D:\4 семестр\КП ООП\Messenger\Resources\close_icon.png"/>
+                </Button>
+            </StackPanel>
+        </DockPanel>
 
         <ContentControl Grid.Row="1"
                         x:Name="content"

@@ -68,9 +68,12 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         private void SendMessage(object obj)
         {
             string message = Message.Text;
-            Task.Factory.StartNew(() => CurrentClient.Client.SendMessage(message, DateTime.Now, CurrentUser.User.Id, Chat.Id));
-            Message.Text = null;
-            OnPropertyChanged("Message");
+            if (message != null)
+            {
+                Task.Factory.StartNew(() => CurrentClient.Client.SendMessage(message, DateTime.Now, CurrentUser.User.Id, Chat.Id));
+                Message.Text = null;
+                OnPropertyChanged("Message");
+            }
         }
 
         private void SendImage(object obj)
