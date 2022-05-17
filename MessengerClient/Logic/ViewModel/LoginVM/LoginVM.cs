@@ -42,14 +42,19 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 return;
             LoginModel.Password = passwordBox.Password;
 
-            if (LoginModel.Login == null || LoginModel.Password == null)
+            if (String.IsNullOrEmpty(LoginModel.Password))
             {
-                MessageBox.Show("Введите логин и пароль");
+                MessageBox.Show("Enter the password");
                 return;
             }
 
-            //MessengerServiceClient client = new MessengerServiceClient();
             Dictionary<string, string> userData = CurrentClient.Client.Login(LoginModel.Login, LoginModel.Password);
+            
+            if (userData == null)
+            {
+                MessageBox.Show("Wrong login or password");
+                return;
+            }
 
             UserModel user = new UserModel()
             {
@@ -66,7 +71,7 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 MainWindow mainWindow = new MainWindow();
                 mainWindow.Show();
                 signWindow.Close();
-            } // TODO
+            }
             else
             {
                 Admin admin = new Admin();

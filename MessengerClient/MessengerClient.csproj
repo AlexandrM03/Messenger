@@ -113,6 +113,7 @@
     <Compile Include="Logic\Model\RegistrationModel.cs" />
     <Compile Include="Logic\Model\ReportModel.cs" />
     <Compile Include="Logic\Model\UserModel.cs" />
+    <Compile Include="Logic\Model\Validation\IDataErrorInfo.cs" />
     <Compile Include="Logic\ViewModel\AdminVM\AdminNavigation.cs" />
     <Compile Include="Logic\ViewModel\AdminVM\AdminVM.cs" />
     <Compile Include="Logic\ViewModel\AdminVM\OnlineUsersVM.cs" />

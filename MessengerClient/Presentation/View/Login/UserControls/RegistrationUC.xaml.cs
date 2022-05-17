@@ -24,5 +24,21 @@ namespace MessengerClient.Presentation.View.Login.UserControls
         {
             InitializeComponent();
         }
+
+        private void password_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                ((dynamic)this.DataContext).RegistrationModel.Password = ((PasswordBox)sender).Password;
+            }
+        }
+
+        private void repeatPassword_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (this.DataContext != null)
+            {
+                ((dynamic)this.DataContext).RegistrationModel.RepeatPassword = ((PasswordBox)sender).Password;
+            }
+        }
     }
 }

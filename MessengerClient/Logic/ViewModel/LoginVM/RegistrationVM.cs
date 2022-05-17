@@ -69,11 +69,17 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
 
         private void Registration(object obj)
         {
-            if (!(obj is PasswordBox passwordBox))
-                return;
+            //if (!(obj is PasswordBox passwordBox))
+            //    return;
 
-            RegistrationModel.Password = passwordBox.Password;
-            RegistrationModel.RepeatPassword = passwordBox.Password;
+            //RegistrationModel.Password = passwordBox.Password;
+            //RegistrationModel.RepeatPassword = passwordBox.Password;
+
+            if (RegistrationModel.Password != RegistrationModel.RepeatPassword)
+            {
+                MessageBox.Show("Passwords don't match");
+                return;
+            }
 
             string result = CurrentClient.Client.Registration(registrationModel.Login,
                 registrationModel.Password,

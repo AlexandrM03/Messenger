@@ -18,7 +18,6 @@ namespace WCFService
         
         public string Registration(string login, string password, string name, string surname, string path)
         {
-            // validate TODO
             try
             {
                 using (UnitOfWork uow = new UnitOfWork())
@@ -45,11 +44,11 @@ namespace WCFService
             using (UnitOfWork uow = new UnitOfWork())
             {
                 string hashPassword = HashManager.GetHash(password);
-                int userAuthId = uow.UserAuthRepository.GetAll().Where(u => u.Login == login && u.Password == hashPassword).FirstOrDefault().Id;
-                User user = uow.UserRepository.GetAll().Where(u => u.UserAuth.Id == userAuthId).FirstOrDefault();
+                UserAuth userAuth = uow.UserAuthRepository.GetAll().Where(u => u.Login == login && u.Password == hashPassword).FirstOrDefault();
 
-                if (user != null)
+                if (userAuth != null)
                 {
+                    User user = uow.UserRepository.GetAll().Where(u => u.UserAuth.Id == userAuth.Id).FirstOrDefault();
                     if (user.Role == "admin")
                         connectedAdmins.Add(new ServerUser
                         {

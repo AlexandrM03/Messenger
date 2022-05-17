@@ -9,7 +9,8 @@
         Title="Admin" Width="1280" Height="720"
         WindowStyle="None"
         AllowsTransparency="True"
-        Background="Transparent">
+        Background="Transparent"
+        Icon="D:\4 семестр\КП ООП\Messenger\Resources\main.ico">
     <Window.DataContext>
         <vm:AdminVM/>
     </Window.DataContext>
