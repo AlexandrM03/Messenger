@@ -80,8 +80,8 @@
                                                     <TextBlock Text="{Binding Path=Surname}" FontSize="14" 
                                                                Foreground="{DynamicResource NameTextBrush}"/>
                                                 </StackPanel>
-                                                <TextBlock Text="{Binding Path=Text}" FontSize="12" Foreground="{DynamicResource MainTextBrush}"/>
-                                                <Image Source="{Binding Path=Path}" MaxHeight="100"/>
+                                                <TextBlock Text="{Binding Path=Text}" MaxWidth="300" TextWrapping="Wrap" FontSize="12" Foreground="{DynamicResource MainTextBrush}"/>
+                                                <Image Source="{Binding Path=Path}" MaxHeight="200"/>
                                                 <TextBlock Text="{Binding Path=Date}" HorizontalAlignment="Right" 
                                                            Foreground="{DynamicResource SecondaryTextBrush}"
                                                            FontSize="8"/>
