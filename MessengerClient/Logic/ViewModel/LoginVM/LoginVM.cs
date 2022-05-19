@@ -53,16 +53,19 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
                 MessageBox.Show("Login is required");
                 return;
             }
-            if (!Regex.IsMatch(LoginModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$")) {
-                MessageBox.Show("Incorrect login");
-                return;
-            }
+            if (LoginModel.Login != "admin")
+                if (!Regex.IsMatch(LoginModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
+                {
+                    MessageBox.Show("Incorrect login");
+                    return;
+                }
 
             Dictionary<string, string> userData = CurrentClient.Client.Login(LoginModel.Login, LoginModel.Password);
             
-            if (userData == null)
+            
+            if (userData.ContainsKey("error"))
             {
-                MessageBox.Show("Wrong login or password");
+                MessageBox.Show(userData["error"]);
                 return;
             }
 

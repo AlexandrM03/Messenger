@@ -22,15 +22,20 @@ namespace WCFService
             {
                 using (UnitOfWork uow = new UnitOfWork())
                 {
-                    string hashPassword = HashManager.GetHash(password);
-                    UserAuth userAuth = new UserAuth() { Login = login, Password = hashPassword };
-                    Media media = new Media() { Path = path };
-                    uow.UserAuthRepository.Add(userAuth);
-                    uow.MediaRepository.Add(media);
-                    User user = new User() { Name = name, Surname = surname, Role = "user", Media = media, UserAuth = userAuth };
-                    uow.UserRepository.Add(user);
-                    uow.Save();
-                    return "Nice";
+                    UserAuth userAuthCheck = uow.UserAuthRepository.GetAll().Where(u => u.Login == login).FirstOrDefault();
+                    if (userAuthCheck == null)
+                    {
+                        string hashPassword = HashManager.GetHash(password);
+                        UserAuth userAuth = new UserAuth() { Login = login, Password = hashPassword };
+                        Media media = new Media() { Path = path };
+                        uow.UserAuthRepository.Add(userAuth);
+                        uow.MediaRepository.Add(media);
+                        User user = new User() { Name = name, Surname = surname, Role = "user", Media = media, UserAuth = userAuth };
+                        uow.UserRepository.Add(user);
+                        uow.Save();
+                        return "Nice";
+                    }
+                    return "User with this login already exists";
                 }
             }
             catch (Exception ex)
@@ -45,10 +50,18 @@ namespace WCFService
             {
                 string hashPassword = HashManager.GetHash(password);
                 UserAuth userAuth = uow.UserAuthRepository.GetAll().Where(u => u.Login == login && u.Password == hashPassword).FirstOrDefault();
+                Dictionary<string, string> result = new Dictionary<string, string>();
 
                 if (userAuth != null)
                 {
                     User user = uow.UserRepository.GetAll().Where(u => u.UserAuth.Id == userAuth.Id).FirstOrDefault();
+
+                    if (connectedUsers.Any(u => u.Id == user.Id))
+                    {
+                        result.Add("error", "User already connected");
+                        return result;
+                    }
+
                     if (user.Role == "admin")
                         connectedAdmins.Add(new ServerUser
                         {
@@ -70,7 +83,6 @@ namespace WCFService
                     }
                     
                     Media media = uow.MediaRepository.GetAll().Where(m => m.Id == user.Media.Id).FirstOrDefault();
-                    Dictionary<string, string> result = new Dictionary<string, string>();
                     result.Add("id", user.Id.ToString());
                     result.Add("name", user.Name);
                     result.Add("surname", user.Surname);
@@ -81,7 +93,8 @@ namespace WCFService
                 }
                 else
                 {
-                    return null;
+                    result.Add("error", "Wrong login or password");
+                    return result;
                 }
             }
         }

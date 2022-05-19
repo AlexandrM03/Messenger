@@ -46,6 +46,44 @@ namespace MessengerTests
         }
 
         [TestMethod]
+        public void Can_Login()
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                Media media = new Media()
+                {
+                    Path = "Path"
+                };
+                unitOfWork.MediaRepository.Add(media);
+                unitOfWork.Save();
+
+                UserAuth userAuth = new UserAuth()
+                {
+                    Login = "Login",
+                    Password = "Password"
+                };
+                unitOfWork.UserAuthRepository.Add(userAuth);
+                unitOfWork.Save();
+
+                User user = new User()
+                {
+                    Name = "Name",
+                    Surname = "Surname",
+                    Role = "user",
+                    Media = media,
+                    UserAuth = userAuth
+                };
+
+                unitOfWork.UserRepository.Add(user);
+                unitOfWork.Save();
+
+                UserAuth loginedUserAuth = unitOfWork.UserAuthRepository.GetAll().Where(u => u.Login == "Login" && u.Password == "Password").FirstOrDefault();
+                User loginedUser = unitOfWork.UserRepository.GetAll().Where(u => u.UserAuth == loginedUserAuth).FirstOrDefault();
+                Assert.IsNotNull(loginedUser);
+            }
+        }
+
+        [TestMethod]
         public void Can_Update_Avatar()
         {
             string path = "Path";
@@ -200,8 +238,9 @@ namespace MessengerTests
                 reported.Text = "This message was hidden by admin";
                 unitOfWork.MessageRepository.Update(reported);
                 unitOfWork.Save();
+                Message updated = unitOfWork.MessageRepository.GetAll().Where(m => m.Id == reported.Id).FirstOrDefault();
 
-                Assert.AreEqual(reported.Text, "This message was hidden by admin");
+                Assert.AreEqual(updated.Text, "This message was hidden by admin");
             }
         }
     }

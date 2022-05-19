@@ -22,6 +22,8 @@ namespace MessengerClient.Logic.Model
                     case "Login":
                         if (String.IsNullOrEmpty(Login))
                             error = "Login is required";
+                        if (Login == "admin")
+                            break;
                         else if (!Regex.IsMatch(Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
                             error = "Incorrect login";
                         break;
