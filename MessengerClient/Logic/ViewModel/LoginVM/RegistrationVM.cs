@@ -70,52 +70,59 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
 
         private void Registration(object obj)
         {
-            if (String.IsNullOrEmpty(RegistrationModel.Login))
+            try
             {
-                MessageBox.Show("Login is required");
-                return;
-            }
-            if (!Regex.IsMatch(RegistrationModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
-            {
-                MessageBox.Show("Incorrect login");
-                return;
-            }
-            if (String.IsNullOrEmpty(RegistrationModel.Name))
-            {
-                MessageBox.Show("Name is required");
-                return;
-            }
-            if (!Regex.IsMatch(RegistrationModel.Name, @"^[A-ZА-Я][A-Za-zА-Яа-я]+$"))
-            {
-                MessageBox.Show("Incorrect name");
-                return;
-            }
-            if (String.IsNullOrEmpty(RegistrationModel.Surname))
-            {
-                MessageBox.Show("Surname is required");
-                return;
-            }
-            if (!Regex.IsMatch(RegistrationModel.Surname, @"^[A-ZА-Я][A-Za-zА-Яа-я]+$"))
-            {
-                MessageBox.Show("Incorrect surname");
-                return;
-            }
+                if (String.IsNullOrEmpty(RegistrationModel.Login))
+                {
+                    MessageBox.Show("Login is required");
+                    return;
+                }
+                if (!Regex.IsMatch(RegistrationModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
+                {
+                    MessageBox.Show("Incorrect login");
+                    return;
+                }
+                if (String.IsNullOrEmpty(RegistrationModel.Name))
+                {
+                    MessageBox.Show("Name is required");
+                    return;
+                }
+                if (!Regex.IsMatch(RegistrationModel.Name, @"^[A-ZА-Я][A-Za-zА-Яа-я]+$"))
+                {
+                    MessageBox.Show("Incorrect name");
+                    return;
+                }
+                if (String.IsNullOrEmpty(RegistrationModel.Surname))
+                {
+                    MessageBox.Show("Surname is required");
+                    return;
+                }
+                if (!Regex.IsMatch(RegistrationModel.Surname, @"^[A-ZА-Я][A-Za-zА-Яа-я]+$"))
+                {
+                    MessageBox.Show("Incorrect surname");
+                    return;
+                }
 
-            if (RegistrationModel.Password != RegistrationModel.RepeatPassword)
-            {
-                MessageBox.Show("Passwords don't match");
-                return;
+                if (RegistrationModel.Password != RegistrationModel.RepeatPassword)
+                {
+                    MessageBox.Show("Passwords don't match");
+                    return;
+                }
+
+                string result = CurrentClient.Client.Registration(registrationModel.Login,
+                    registrationModel.Password,
+                    registrationModel.Name,
+                    registrationModel.Surname,
+                    registrationModel.Path);
+
+                if (result != "Nice")
+                {
+                    MessageBox.Show(result);
+                }
             }
-
-            string result = CurrentClient.Client.Registration(registrationModel.Login,
-                registrationModel.Password,
-                registrationModel.Name,
-                registrationModel.Surname,
-                registrationModel.Path);
-
-            if (result != "Nice")
+            catch (Exception)
             {
-                MessageBox.Show(result);
+                MessageBox.Show("Error with server connection");
             }
         }
     }

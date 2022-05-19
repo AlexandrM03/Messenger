@@ -84,8 +84,8 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             if (openFileDialog.ShowDialog() == true)
             {
                 Message.Path = openFileDialog.FileName;
+                Task.Factory.StartNew(() => CurrentClient.Client.SendImage(Message.Path, DateTime.Now, CurrentUser.User.Id, Chat.Id));
             }
-            Task.Factory.StartNew(() => CurrentClient.Client.SendImage(Message.Path, DateTime.Now, CurrentUser.User.Id, Chat.Id));
         }
 
         private void SendReport(object obj)

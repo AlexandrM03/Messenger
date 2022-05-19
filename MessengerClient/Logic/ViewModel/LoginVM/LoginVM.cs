@@ -39,57 +39,64 @@ namespace MessengerClient.Logic.ViewModel.LoginVM
 
         private void SignIn(object obj)
         {
-            if (!(obj is PasswordBox passwordBox))
-                return;
-            LoginModel.Password = passwordBox.Password;
+            try
+            {
+                if (!(obj is PasswordBox passwordBox))
+                    return;
+                LoginModel.Password = passwordBox.Password;
 
-            if (String.IsNullOrEmpty(LoginModel.Password))
-            {
-                MessageBox.Show("Enter the password");
-                return;
-            }
-            if (String.IsNullOrEmpty(LoginModel.Login))
-            {
-                MessageBox.Show("Login is required");
-                return;
-            }
-            if (LoginModel.Login != "admin")
-                if (!Regex.IsMatch(LoginModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
+                if (String.IsNullOrEmpty(LoginModel.Password))
                 {
-                    MessageBox.Show("Incorrect login");
+                    MessageBox.Show("Enter the password");
+                    return;
+                }
+                if (String.IsNullOrEmpty(LoginModel.Login))
+                {
+                    MessageBox.Show("Login is required");
+                    return;
+                }
+                if (LoginModel.Login != "admin")
+                    if (!Regex.IsMatch(LoginModel.Login, @"^[A-ZА-Я][A-Za-zА-Яа-я0-9_-]+$"))
+                    {
+                        MessageBox.Show("Incorrect login");
+                        return;
+                    }
+
+                Dictionary<string, string> userData = CurrentClient.Client.Login(LoginModel.Login, LoginModel.Password);
+
+
+                if (userData.ContainsKey("error"))
+                {
+                    MessageBox.Show(userData["error"]);
                     return;
                 }
 
-            Dictionary<string, string> userData = CurrentClient.Client.Login(LoginModel.Login, LoginModel.Password);
-            
-            
-            if (userData.ContainsKey("error"))
-            {
-                MessageBox.Show(userData["error"]);
-                return;
-            }
+                UserModel user = new UserModel()
+                {
+                    Id = Int32.Parse(userData["id"]),
+                    Name = userData["name"],
+                    Surname = userData["surname"],
+                    Role = userData["role"],
+                    Avatar = userData["path"]
+                };
+                CurrentUser.SetNewUser(user);
 
-            UserModel user = new UserModel()
-            {
-                Id = Int32.Parse(userData["id"]),
-                Name = userData["name"],
-                Surname = userData["surname"],
-                Role = userData["role"],
-                Avatar = userData["path"]
-            };
-            CurrentUser.SetNewUser(user);
-
-            if (CurrentUser.User.Role.Equals("user"))
-            {
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.Show();
-                signWindow.Close();
+                if (CurrentUser.User.Role.Equals("user"))
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    signWindow.Close();
+                }
+                else
+                {
+                    Admin admin = new Admin();
+                    admin.Show();
+                    signWindow.Close();
+                }
             }
-            else
+            catch (Exception)
             {
-                Admin admin = new Admin();
-                admin.Show();
-                signWindow.Close();
+                MessageBox.Show("Error with server connection");
             }
         }
     }

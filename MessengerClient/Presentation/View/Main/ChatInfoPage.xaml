@@ -39,8 +39,8 @@
     </Page.Resources>
     
     <Grid Background="{DynamicResource MainBackgroundBrush}">
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <StackPanel x:Name="messages">
                     <ItemsControl ItemsSource="{Binding Path=Users}" x:Name="myItems">
                         <ItemsControl.ItemTemplate>
@@ -99,7 +99,7 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </StackPanel>
-            </ScrollViewer>
-        </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>
