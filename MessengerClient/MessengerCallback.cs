@@ -33,7 +33,7 @@ namespace MessengerClient
 
         public void CreateChatCallback(int id, string name, int admin, string path)
         {
-            MainVM.Chats.Add(new ChatModel()
+            MainVM.Chats.Insert(0, new ChatModel()
             {
                 Id = id,
                 Name = name,
@@ -53,7 +53,7 @@ namespace MessengerClient
 
         public void AddToChatCallback(int id, string name, int admin, string path, string lastMessage)
         {
-            MainVM.Chats.Add(new ChatModel()
+            MainVM.Chats.Insert(0, new ChatModel()
             {
                 Id = id,
                 Name = name,

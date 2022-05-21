@@ -52,6 +52,9 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             if (!(obj is UserModel user))
                 return;
 
+            //Task.Factory.StartNew(() => CurrentClient.Client.SendMessage(message, DateTime.Now, CurrentUser.User.Id, CurrentChat.Chat.Id));
+            string message = user.Name + " " + user.Surname + " left the chat";
+            CurrentClient.Client.SendMessage(message, DateTime.Now, CurrentUser.User.Id, CurrentChat.Chat.Id);
             CurrentClient.Client.DeleteUserFromChat(CurrentChat.Chat.Id, user.Id);
             Users.Remove(user);
             OtherUsers.Add(user);
@@ -62,6 +65,8 @@ namespace MessengerClient.Logic.ViewModel.MainVM
             if (!(obj is UserModel user))
                 return;
 
+            string message = user.Name + " " + user.Surname + " joined the chat";
+            CurrentClient.Client.SendMessage(message, DateTime.Now, CurrentUser.User.Id, CurrentChat.Chat.Id);
             CurrentClient.Client.AddUserToChat(CurrentChat.Chat.Id, user.Id);
             Users.Add(user);
             OtherUsers.Remove(user);

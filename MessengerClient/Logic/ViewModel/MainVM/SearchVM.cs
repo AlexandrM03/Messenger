@@ -83,7 +83,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
                     });
             }
             searchUsers = users;
-            chatModel = new ChatModel();
+            chatModel = new ChatModel()
+            {
+                Image = @"D:\4 семестр\КП ООП\Messenger\Resources\default.png"
+            };
 
             SelectItemCommand = new DelegateCommand(SelectItem);
             SearchCommand = new DelegateCommand(Search);
@@ -105,9 +108,10 @@ namespace MessengerClient.Logic.ViewModel.MainVM
         private async void CreateChat(object obj)
         {
             int[] users_id = selectedUsers.Select(u => u.Id).ToArray();
-
-            //MessengerServiceClient client = new MessengerServiceClient(null);
-            await Task.Factory.StartNew(() => CurrentClient.Client.CreateChat(ChatModel.Name, ChatModel.Image, CurrentUser.User.Id, users_id));
+            string path = ChatModel.Image;
+            
+            await Task.Factory.StartNew(() => CurrentClient.Client.CreateChat(ChatModel.Name, path, CurrentUser.User.Id, users_id));
+            ChatModel.Image = @"D:\4 семестр\КП ООП\Messenger\Resources\default.png";
         }
 
         private void ChooseImage(object obj)
