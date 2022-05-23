@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="MessengerClient.Logic.ViewModel.AdminVM.AdminVM" Collapsed="true">
+    <Position X="20" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAIAAAACAAAABAAAAAAAAEABAAAAAAAA=</HashCode>
+      <FileName>Logic\ViewModel\AdminVM\AdminVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.AdminVM.OnlineUsersVM" Collapsed="true">
+    <Position X="17.75" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\ViewModel\AdminVM\OnlineUsersVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.AdminVM.ReportVM" Collapsed="true">
+    <Position X="22.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAQAAAAAAAgAAAAAAAAAAAAAAAAAAgCAAAAg=</HashCode>
+      <FileName>Logic\ViewModel\AdminVM\ReportVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.BaseVM" Collapsed="true">
+    <Position X="20" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\ViewModel\BaseVM.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.LoginVM.LoginVM" Collapsed="true">
+    <Position X="20" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAAAiAAAAAAAAQAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Logic\ViewModel\LoginVM\LoginVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.LoginVM.RegistrationVM" Collapsed="true">
+    <Position X="17.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAACAAAACAAAAAAAAAAAQAAQAAIAEEACA=</HashCode>
+      <FileName>Logic\ViewModel\LoginVM\RegistrationVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.LoginVM.SignVM" Collapsed="true">
+    <Position X="22.25" Y="3" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAggADAAAAAhAAIAAAAAACAAAAQBAAAAAAAA=</HashCode>
+      <FileName>Logic\ViewModel\LoginVM\SignVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.MainVM.AccountVM" Collapsed="true">
+    <Position X="17.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAQAAAQEBAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Logic\ViewModel\MainVM\AccountVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.MainVM.ChatInfoVM" Collapsed="true">
+    <Position X="17.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAEAACAAAAIAAAAAAEAAAAAgAAAAIAAgAAAAAQAAAAA=</HashCode>
+      <FileName>Logic\ViewModel\MainVM\ChatInfoVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.MainVM.ChatVM" Collapsed="true">
+    <Position X="20" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAIABgAAAAAAAACAAAAAAAAIAAAgDAAAIIQAAAiA=</HashCode>
+      <FileName>Logic\ViewModel\MainVM\ChatVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.MainVM.MainVM" Collapsed="true">
+    <Position X="22.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAABAAAAAgEAAJABEACAAAAAAAAAAAAIACBAAAAAQgA=</HashCode>
+      <FileName>Logic\ViewModel\MainVM\MainVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MessengerClient.Logic.ViewModel.MainVM.SearchVM" Collapsed="true">
+    <Position X="22.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAASAAAAgAwCIAAAACAAQAAACEQAAAAQQAAAEgAAA=</HashCode>
+      <FileName>Logic\ViewModel\MainVM\SearchVM.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
